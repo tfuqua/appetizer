@@ -12,7 +12,9 @@ class Header extends Component<*> {
       <AppBar position="static">
         <HeaderWrapper>
           <div>
-            <Typography>St. Clair App Contest</Typography>
+            <Link to="/">
+              <Typography>St. Clair App Contest</Typography>
+            </Link>
           </div>
 
           <div>

@@ -8,9 +8,11 @@ class Vote extends Component<*> {
   render() {
     return (
       <div>
-        <Card>
-          <h2>Vote</h2>
-        </Card>
+        <Container>
+          <Card>
+            <h2>Vote</h2>
+          </Card>
+        </Container>
       </div>
     );
   }

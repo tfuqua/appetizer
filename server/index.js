@@ -2,8 +2,11 @@
 import express from 'express';
 import config from './config';
 import assets from '../build/asset-manifest.json';
+import routes from './routes';
 
 const app = express();
+
+app.use('/api', routes);
 app.use(express.static('./build'));
 
 app.use('*', (req, res) => {
