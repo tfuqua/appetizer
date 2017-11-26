@@ -3,9 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "express": "^4.16.2",
+    "glamor": "^2.20.40",
+    "glamorous": "^4.11.0",
+    "isomorphic-fetch": "^2.2.1",
+    "jss": "^9.3.3",
+    "material-ui": "^0.19.4",
+    "material-ui-icons": "^1.0.0-beta.17",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
-    "react-scripts": "1.0.17"
+    "react-jss": "^8.1.0",
+    "react-loadable": "^5.3.1",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.17",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
