@@ -8,25 +8,27 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import JssProvider from 'react-jss/lib/JssProvider';
 import { create } from 'jss';
 import preset from 'jss-preset-default';
+
+import { configureStore } from './store';
 import registerServiceWorker from './registerServiceWorker';
 import App from './containers/App';
 import './index.css';
-import TKTheme from './theme';
+import Theme from './theme';
 
 const jss = create(preset());
 jss.options.insertionPoint = 'insertion-point-jss';
 
-const store = {};//configureStore(window.__INITIAL_STATE__);
+const store = configureStore(window.__INITIAL_STATE__);
 
 ReactDOM.render(
   <Provider store={store}>
-      <JssProvider jss={jss}>
-        <Router>
-          <MuiThemeProvider theme={TKTheme}>
-            <Route path="/" component={App} />
-          </MuiThemeProvider>
-        </Router>
-      </JssProvider>
+    <JssProvider jss={jss}>
+      <Router>
+        <MuiThemeProvider theme={Theme}>
+          <Route path="/" component={App} />
+        </MuiThemeProvider>
+      </Router>
+    </JssProvider>
   </Provider>,
   document.getElementById('root')
 );
