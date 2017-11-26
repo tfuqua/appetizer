@@ -3,3 +3,5 @@ const baseURL = typeof window === 'undefined' ? process.env.BASE_URL || 'http://
 
 //Login
 export const API_LEADERBOARD = `${baseURL}/api/leaderboard`;
+
+export const API_VOTERS = `${baseURL}/api/voters`;

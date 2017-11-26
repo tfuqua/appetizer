@@ -1,4 +1,12 @@
+import Dish from '../models/Dish';
+
 //Get Leaderboard
 export function getLeaderboard(req, res) {
-  res.send([1, 2, 3]);
+  Dish.find()
+    .then(data => {
+      res.send(data);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    });
 }

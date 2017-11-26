@@ -1,5 +1,8 @@
 //@flow
 import express from 'express';
+import mongoose from 'mongoose';
+
+import dummydata from './util/dummydata';
 import config from './config';
 import assets from '../build/asset-manifest.json';
 import routes from './routes';
@@ -41,6 +44,20 @@ app.use('*', (req, res) => {
   </html>`;
 
   res.send(markup);
+});
+
+// MongoDB Connection
+mongoose.Promise = global.Promise;
+mongoose.connect(config.mongoURL, { useMongoClient: true }, error => {
+  if (error) {
+    console.error(error);
+    console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
+    throw error;
+  }
+
+  if (process.env.NODE_ENV === 'development') {
+    dummydata();
+  }
 });
 
 app.listen(config.port, () => {
