@@ -1,9 +1,20 @@
 // @flow
-import React from 'react';
 import routeLoader from './util/routeLoader';
 
 //App Specific components
+const Leaderboard = routeLoader(() => import(/* webpackChunkName: "Leaderboard" */ './containers/Leaderboard'));
+const Vote = routeLoader(() => import(/* webpackChunkName: "Vote" */ './containers/Vote'));
 
-export const routes = (props: Object) => {
-  return [];
-};
+const routes = [
+  {
+    path: '/',
+    component: Leaderboard,
+    exact: true
+  },
+  {
+    path: '/vote',
+    component: Vote
+  }
+];
+
+export default routes;

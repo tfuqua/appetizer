@@ -1,5 +1,6 @@
 //@flow
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
@@ -15,7 +16,9 @@ class Header extends Component<*> {
           </div>
 
           <div>
-            <Button raised>Vote</Button>
+            <Link to="/vote">
+              <Button raised>Vote</Button>
+            </Link>
           </div>
         </HeaderWrapper>
       </AppBar>
