@@ -1,8 +1,10 @@
 import Voter from '../models/Voter';
+import Vote from '../models/Vote';
 
-//Get Leaderboard
+//Get Voters
 export function getVoters(req, res) {
   Voter.find()
+    .populate('votes')
     .then(data => {
       res.send(data);
     })

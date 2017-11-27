@@ -6,6 +6,7 @@ import Card from 'material-ui/Card';
 
 import { getLeaderboard } from './actions';
 import { Container } from 'components/Layout';
+import LeaderboardTable from './LeaderboardTable';
 import Loader from 'components/Loader';
 
 class Leaderboard extends Component<*> {
@@ -18,21 +19,7 @@ class Leaderboard extends Component<*> {
       <div>
         <Container>
           <Card>
-            <Container>
-              <h2>Leaderboard</h2>
-
-              {this.props.scores ? (
-                <div>
-                  {this.props.scores.map((score, i) => (
-                    <div>
-                      <h3>{score.title}</h3>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <Loader />
-              )}
-            </Container>
+            <Container>{this.props.scores ? <LeaderboardTable scores={this.props.scores} /> : <Loader />}</Container>
           </Card>
         </Container>
       </div>
