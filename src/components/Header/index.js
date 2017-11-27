@@ -35,5 +35,8 @@ const HeaderWrapper = glamorous.div({
   padding: '8px',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between'
+  justifyContent: 'space-between',
+  '& a > p': {
+    color: '#fff'
+  }
 });

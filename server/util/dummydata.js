@@ -4,85 +4,110 @@ import Voter from '../models/Voter';
 import Vote from '../models/Vote';
 
 export default function() {
-  createVoterData();
-  createDishData();
-  createVoteData();
+  Voter.count()
+    .exec((err, count) => {
+      if (count === 0) {
+        createVoterData();
+      }
+    })
+    .then(() => {
+      Dish.count()
+        .exec((err, count) => {
+          if (count === 0) {
+            createDishData();
+          }
+        })
+        .then(() => {
+          Vote.count().exec((err, count) => {
+            if (count === 0) {
+              createVoteData();
+            }
+          });
+        });
+    });
 }
 
 function createVoterData() {
-  Voter.count().exec((err, count) => {
-    if (count > 0) {
-      return;
-    }
+  console.log('Creating Voter Data');
 
-    for (let i = 0; i < 8; i++) {
-      const voter = new Voter({
-        name: `Voter #${i}`,
-        voted: false
-      });
+  for (let i = 0; i < 8; i++) {
+    const voter = new Voter({
+      name: `Voter #${i}`,
+      voted: false
+    });
 
-      Voter.create(voter, error => {
-        if (error) {
-          console.log(error);
-        }
-      });
-    }
-  });
+    Voter.create(voter, error => {
+      if (error) {
+        console.log(error);
+      }
+    });
+  }
+
+  console.log('Complete Creating Voter Data');
 }
 
 function createDishData() {
-  Dish.count().exec((err, count) => {
-    if (count > 0) {
-      return;
-    }
+  console.log('Creating Dish Data');
 
-    for (let i = 0; i < 21; i++) {
-      const dish = new Dish({
-        number: i,
-        title: `Dish #${i}`,
-        description: `Description for dish ${i}`
-      });
+  for (let i = 0; i < 21; i++) {
+    const dish = new Dish({
+      number: i,
+      title: `Dish #${i}`,
+      description: `Description for dish ${i}`
+    });
 
-      Dish.create(dish, error => {
-        if (error) {
-          console.log(error);
-        }
-      });
-    }
-  });
+    Dish.create(dish, error => {
+      if (error) {
+        console.log(error);
+      }
+    });
+  }
+
+  console.log('Complete Dish Voter Data');
 }
 
 function createVoteData() {
-  Vote.count().exec((err, count) => {
-    if (count > 20) {
-      return;
-    }
+  console.log('Creating Vote Data');
 
-    let dishPromise = Dish.findOne().exec();
-    let voterPromise = Voter.findOne().exec();
+  let dishPromise = Dish.find().exec();
+  let voterPromise = Voter.find().exec();
 
-    return Promise.all([dishPromise, voterPromise])
-      .then(values => {
-        let dish = values[0];
-        let voter = values[1];
+  Promise.all([dishPromise, voterPromise])
+    .then(values => {
+      let dishes = values[0];
+      let voters = values[1];
 
-        const vote = new Vote({
-          taste: 4,
-          originality: 3,
-          presentation: 5,
-          dish: dish.id,
-          voter: voter.id
+      voters.forEach(voter => {
+        dishes.forEach(dish => {
+          const vote = new Vote({
+            taste: getRandomScore(),
+            originality: getRandomScore(),
+            presentation: getRandomScore(),
+            dish: dish.id,
+            voter: voter.id
+          });
+
+          Vote.create(vote, error => {
+            if (error) {
+              console.log(error);
+            }
+          });
         });
-
-        voter.votes.push(vote);
-        dish.votes.push(vote);
-        dish.save();
-        voter.save();
-
-        Vote.create();
-      })
-      .catch(reason => {
-        console.log(reason);
       });
-  });
+    })
+    .catch(reason => {
+      console.log(reason);
+    });
+
+  console.log('Complete Creating Vote Data');
+}
+
+function getRandomScore() {
+  let min = 1;
+  let max = 5;
+
+  min = Math.ceil(min);
+  max = Math.floor(max);
+
+  return Math.floor(Math.random() * (max - min)) + min;
 }

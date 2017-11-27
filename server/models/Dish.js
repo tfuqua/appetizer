@@ -5,8 +5,7 @@ const dishSchema = new Schema(
   {
     number: { type: Number, required: true },
     title: { type: 'String', required: true },
-    description: { type: 'String', required: true },
-    votes: [{ type: Schema.Types.ObjectId, ref: 'Vote' }]
+    description: { type: 'String', required: true }
   },
   {
     toObject: {
@@ -17,5 +16,11 @@ const dishSchema = new Schema(
     }
   }
 );
+
+dishSchema.virtual('votes', {
+  ref: 'Vote',
+  localField: '_id',
+  foreignField: 'dish'
+});
 
 export default mongoose.model('Dish', dishSchema);

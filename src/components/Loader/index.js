@@ -35,19 +35,13 @@ export const LoadingComponent = ({ isLoading, error, pastDelay }: Props) => {
   }
 };
 
-const LoaderWrapper = glamorous.div(
-  {
-    top: 0,
-    left: 0,
-    width: '100%',
-    textAlign: 'center',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    display: 'flex',
-    zIndex: -1
-  },
-  ({ inline }) => ({
-    position: inline ? 'static' : 'absolute'
-  })
-);
+const LoaderWrapper = glamorous.div({
+  position: 'static',
+  width: '100%',
+  textAlign: 'center',
+  height: '100%',
+  alignItems: 'center',
+  justifyContent: 'center',
+  display: 'flex',
+  zIndex: -1
+});
