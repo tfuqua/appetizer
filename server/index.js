@@ -1,6 +1,8 @@
 //@flow
 import express from 'express';
 import mongoose from 'mongoose';
+import http from 'http';
+import SocketIO from 'socket.io';
 
 import dummydata from './util/dummydata';
 import config from './config';
@@ -8,6 +10,10 @@ import assets from '../build/asset-manifest.json';
 import routes from './routes';
 
 const app = express();
+const server = http.Server(app);
+const io = new SocketIO(server);
+
+console.log(io);
 
 app.use('/api', routes);
 app.use(express.static('./build'));
@@ -60,7 +66,13 @@ mongoose.connect(config.mongoURL, { useMongoClient: true }, error => {
   }
 });
 
-app.listen(config.port, () => {
+io.on('connection', function(socket) {
+  socket.on('my other event', function(data) {
+    socket.emit('news', { data });
+  });
+});
+
+server.listen(config.port, () => {
   console.log(`App is up and running on ${config.port}`);
 });
 
