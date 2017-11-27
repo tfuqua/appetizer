@@ -1,6 +1,6 @@
 //@flow
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
@@ -18,9 +18,11 @@ class Header extends Component<*> {
           </div>
 
           <div>
-            <Link to="/vote">
-              <Button raised>Vote</Button>
-            </Link>
+            {this.props.location.pathname === '/' ? (
+              <Link to="/vote">
+                <Button raised>Vote</Button>
+              </Link>
+            ) : null}
           </div>
         </HeaderWrapper>
       </AppBar>
@@ -28,7 +30,7 @@ class Header extends Component<*> {
   }
 }
 
-export default Header;
+export default withRouter(Header);
 
 const HeaderWrapper = glamorous.div({
   minHeight: 54,
