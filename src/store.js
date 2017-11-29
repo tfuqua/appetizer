@@ -1,6 +1,5 @@
 // @flow
 import { createStore, applyMiddleware, compose } from 'redux';
-import type { Store } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducer';
 
@@ -12,7 +11,7 @@ const enhancers = compose(
 );
 
 //Creates Store
-const store: Store = createStore(rootReducer, initialState, enhancers);
+const store = createStore(rootReducer, initialState, enhancers);
 
 //Can be called later to create store
 export function configureStore(initialState: Object = {}) {

@@ -2,25 +2,20 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import http from 'http';
-import SocketIO from 'socket.io';
 
 import markup from './util/markup';
 import dummydata from './util/dummydata';
 import config from './config';
 import routes from './routes';
+import socketInit from './socket';
 
 const app = express();
 const server = http.Server(app);
-const io = new SocketIO(server);
+socketInit(server); //Setup Websocket
 
 app.use('/api', routes);
 app.use(express.static('./build'));
-
-app.use('*', (req, res) => {
-  // This context object contains the results of the render
-
-  res.send(markup);
-});
+app.use('*', (req, res) => res.send(markup));
 
 // MongoDB Connection
 mongoose.Promise = global.Promise;
@@ -33,12 +28,6 @@ mongoose.connect(config.mongoURL, { useMongoClient: true }, error => {
   if (process.env.NODE_ENV === 'development') {
     dummydata();
   }
-});
-
-io.on('connection', function(socket) {
-  socket.on('my other event', function(data) {
-    socket.emit('news', { data });
-  });
 });
 
 server.listen(config.port, () => {

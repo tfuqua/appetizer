@@ -11,6 +11,7 @@ import preset from 'jss-preset-default';
 
 import { configureStore } from './store';
 import registerServiceWorker from './registerServiceWorker';
+import addSocketListeners from 'socketListeners';
 import App from './containers/App';
 import './index.css';
 import Theme from './theme';
@@ -19,6 +20,7 @@ const jss = create(preset());
 jss.options.insertionPoint = 'insertion-point-jss';
 
 const store = configureStore(window.__INITIAL_STATE__);
+addSocketListeners(store.dispatch, store.getState);
 
 ReactDOM.render(
   <Provider store={store}>

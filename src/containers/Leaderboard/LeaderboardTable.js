@@ -74,16 +74,16 @@ class LeaderboardTable extends Component<Props, State> {
           {data.map((score, i) => (
             <TableRow key={i}>
               <Cell>{score.title}</Cell>
-              <Cell numeric sort={this.state.orderBy === 'taste'}>
+              <Cell numeric sort={this.state.orderBy === 'taste' ? 'true' : undefined}>
                 <Score value={score.taste} />
               </Cell>
-              <Cell numeric sort={this.state.orderBy === 'presentation'}>
+              <Cell numeric sort={this.state.orderBy === 'presentation' ? 'true' : undefined}>
                 <Score value={score.presentation} />
               </Cell>
-              <Cell numeric sort={this.state.orderBy === 'originality'}>
+              <Cell numeric sort={this.state.orderBy === 'originality' ? 'true' : undefined}>
                 <Score value={score.originality} />
               </Cell>
-              <Cell numeric sort={this.state.orderBy === 'total'}>
+              <Cell numeric sort={this.state.orderBy === 'total' ? 'true' : undefined}>
                 <Score value={score.total} />
               </Cell>
             </TableRow>

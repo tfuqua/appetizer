@@ -18,6 +18,19 @@ export function getLeaderboard(req, res) {
     });
 }
 
+export function getLeaderboardData() {
+  let leaderboard = [];
+  return Dish.find()
+    .populate('votes')
+    .then(data => {
+      data.forEach(dish => {
+        leaderboard.push(calculateScore(dish));
+      });
+
+      return leaderboard;
+    });
+}
+
 function calculateScore(dish) {
   if (dish.votes.length === 0) {
     return {
