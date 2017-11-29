@@ -1,6 +1,7 @@
 //@flow
 import express from 'express';
 import mongoose from 'mongoose';
+import path from 'path';
 import http from 'http';
 
 import markup from './util/markup';
@@ -14,7 +15,8 @@ const server = http.Server(app);
 socketInit(server); //Setup Websocket
 
 app.use('/api', routes);
-app.use(express.static('./build'));
+app.use('/static', express.static(path.join(__dirname, '../static')));
+
 app.use('*', (req, res) => res.send(markup));
 
 // MongoDB Connection

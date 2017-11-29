@@ -16,7 +16,6 @@ export function fetchScores() {
 }
 
 export function vote() {
-  console.log('test');
   return (dispatch: Function) => {
     socket.emit('vote');
   };
