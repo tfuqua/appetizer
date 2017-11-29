@@ -31,6 +31,10 @@ export function getLeaderboardData() {
     });
 }
 
+export function vote() {
+  return Dish.findOne().deleteOne();
+}
+
 function calculateScore(dish) {
   if (dish.votes.length === 0) {
     return {

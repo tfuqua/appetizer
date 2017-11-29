@@ -1,5 +1,5 @@
 import SocketIO from 'socket.io';
-import { getLeaderboardData } from './service/leaderboardService';
+import { getLeaderboardData, vote } from './service/leaderboardService';
 
 function socketInit(server) {
   const io = new SocketIO(server);
@@ -8,6 +8,14 @@ function socketInit(server) {
     socket.on('fetchScores', data => {
       getLeaderboardData().then(results => {
         socket.emit('getScores', results);
+      });
+    });
+
+    socket.on('vote', data => {
+      vote().then(result => {
+        getLeaderboardData().then(results => {
+          socket.broadcast.emit('getScores', results);
+        });
       });
     });
   });

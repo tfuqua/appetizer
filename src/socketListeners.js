@@ -14,3 +14,10 @@ export function fetchScores() {
     socket.emit('fetchScores');
   };
 }
+
+export function vote() {
+  console.log('test');
+  return (dispatch: Function) => {
+    socket.emit('vote');
+  };
+}

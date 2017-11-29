@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Card from 'material-ui/Card';
+import Button from 'material-ui/Button';
 
+import { vote } from '../../socketListeners';
 import { getVoters } from './actions';
 import { Container } from 'components/Layout';
 import Loader from 'components/Loader';
@@ -12,12 +14,20 @@ class Vote extends Component<*> {
   componentDidMount() {
     this.props.getVoters();
   }
+
+  vote = () => {
+    this.props.vote();
+  };
+
   render() {
     return (
       <div>
         <Container>
           <Card>
             <Container>
+              <Button raised onClick={this.vote}>
+                Vote
+              </Button>
               {this.props.voters ? (
                 <div>
                   {this.props.voters.map((voter, i) => (
@@ -44,7 +54,7 @@ function mapStateToProps(store, props) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getVoters }, dispatch);
+  return bindActionCreators({ getVoters, vote }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Vote);
