@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Button from 'material-ui/Button';
+import AddIcon from 'material-ui-icons/Add';
 import glamorous from 'glamorous';
 
 import VoterRow from './VoterRow';
@@ -33,6 +34,13 @@ class VoterTable extends Component<Props, State> {
   deleteVoter = (index: number) => {
     let voters = this.state.voters;
     voters.splice(index, 1);
+
+    this.setState({ voters });
+  };
+
+  addVoter = () => {
+    let voters = this.state.voters;
+    voters.push({ name: '', voted: false });
 
     this.setState({ voters });
   };
@@ -69,6 +77,11 @@ class VoterTable extends Component<Props, State> {
             ))}
           </TableBody>
         </Table>
+        <TextRight>
+          <Button fab raised color="primary" onClick={this.addVoter}>
+            <AddIcon />
+          </Button>
+        </TextRight>
       </form>
     );
   }
