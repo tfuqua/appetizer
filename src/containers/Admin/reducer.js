@@ -1,5 +1,5 @@
 // @flow
-import { GET_VOTERS } from './actions';
+import { GET_VOTERS, GET_DISHES } from './actions';
 
 function adminReducer(state: Object = {}, action: Object) {
   switch (action.type) {
@@ -7,6 +7,11 @@ function adminReducer(state: Object = {}, action: Object) {
       return {
         ...state,
         voters: action.voters
+      };
+    case GET_DISHES:
+      return {
+        ...state,
+        dishes: action.dishes
       };
     default:
       return state;

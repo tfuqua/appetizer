@@ -13,7 +13,7 @@ type State = {
 };
 class Admin extends Component<Props, State> {
   state = {
-    value: 1
+    value: 0
   };
 
   handleChange = (event: Event, value: number) => {

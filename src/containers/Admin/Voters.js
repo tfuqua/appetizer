@@ -19,7 +19,7 @@ class Voters extends Component<Props> {
   }
 
   render() {
-    return <Container>{this.props.voters ? <VoterTable voters={this.props.voters} /> : <Loader />}</Container>;
+    return <div>{this.props.voters ? <VoterTable voters={this.props.voters} /> : <Loader />}</div>;
   }
 }
 

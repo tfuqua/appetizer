@@ -3,7 +3,6 @@ import Voter from '../models/Voter';
 //Get Voters
 export function getVoters(req, res) {
   Voter.find()
-    .populate('votes')
     .then(data => {
       res.send(data);
     })
