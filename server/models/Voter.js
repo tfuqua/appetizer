@@ -16,10 +16,10 @@ const voterSchema = new Schema(
   }
 );
 
-voterSchema.virtual('votes', {
+/*voterSchema.virtual('votes', {
   ref: 'Vote',
   localField: '_id',
   foreignField: 'voter'
-});
+});*/
 
 export default mongoose.model('Voter', voterSchema);
