@@ -18,11 +18,13 @@ class Header extends Component<*> {
           </div>
 
           <div>
-            {this.props.location.pathname === '/' ? (
+            {this.props.location.pathname === '/' && (
               <Link to="/vote">
                 <Button raised>Vote</Button>
               </Link>
-            ) : null}
+            )}
+            &nbsp;&nbsp;
+            <Link to="/admin">Admin</Link>
           </div>
         </HeaderWrapper>
       </AppBar>
