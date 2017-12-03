@@ -1,6 +1,7 @@
 //@flow
 import express from 'express';
 import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
 import path from 'path';
 import http from 'http';
 
@@ -14,6 +15,7 @@ const app = express();
 const server = http.Server(app);
 socketInit(server); //Setup Websocket
 
+app.use(bodyParser.json());
 app.use('/api', routes);
 app.use('/static', express.static(path.join(__dirname, '../static')));
 

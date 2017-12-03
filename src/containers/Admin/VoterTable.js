@@ -3,13 +3,15 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import Button from 'material-ui/Button';
+import glamorous from 'glamorous';
 
-import TextField from 'components/TextField';
 import VoterRow from './VoterRow';
-import {} from './actions';
+import { saveVoters } from './actions';
 
 type Props = {
-  voters: Array<Object>
+  voters: Array<Object>,
+  saveVoters: Function
 };
 type State = {
   voters: Array<Object>
@@ -23,7 +25,6 @@ class VoterTable extends Component<Props, State> {
   formChange = (index: number, field: string, value: any) => {
     let voters = this.state.voters;
     let voter = { ...voters[index], [field]: value };
-
     voters.splice(index, 1, voter);
 
     this.setState({ voters });
@@ -36,9 +37,24 @@ class VoterTable extends Component<Props, State> {
     this.setState({ voters });
   };
 
+  handleSubmit = (e: Event) => {
+    e.preventDefault();
+
+    this.props.saveVoters(this.state.voters).then(response => {
+      if (response) {
+        console.log(response);
+      }
+    });
+  };
+
   render() {
     return (
-      <div>
+      <form onSubmit={this.handleSubmit}>
+        <TextRight>
+          <Button raised color="primary" type="submit">
+            Save
+          </Button>
+        </TextRight>
         <Table>
           <TableHead>
             <TableRow>
@@ -53,13 +69,17 @@ class VoterTable extends Component<Props, State> {
             ))}
           </TableBody>
         </Table>
-      </div>
+      </form>
     );
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators({ saveVoters }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(VoterTable);
+
+const TextRight = glamorous.div({
+  textAlign: 'right'
+});

@@ -23,3 +23,16 @@ export function getVoters() {
       });
   };
 }
+
+export function saveVoters(voters: Array<Object>) {
+  return (dispatch: Function) => {
+    return request(API_VOTERS, {
+      method: 'POST',
+      body: JSON.stringify(voters)
+    }).catch(error => {
+      Promise.resolve(error).then(err => {
+        dispatch(displayMessage(err, HEADER_LOCATION));
+      });
+    });
+  };
+}

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { TableCell, TableRow } from 'material-ui/Table';
 import CancelIcon from 'material-ui-icons/Cancel';
 
+import Checkbox from 'components/Checkbox';
 import TextField from 'components/TextField';
 
 type Props = {
@@ -24,7 +25,13 @@ class VoterRow extends Component<Props> {
             placeholder="Enter Voter Name"
           />
         </TableCell>
-        <TableCell>{this.props.voter.voted ? 'voted' : 'hasnt voted'}</TableCell>
+        <TableCell>
+          <Checkbox
+            name="voted"
+            value={this.props.voter.voted}
+            fieldChange={this.props.formChange.bind(this, this.props.index)}
+          />
+        </TableCell>
         <TableCell>
           <CancelIcon onClick={this.props.deleteVoter.bind(this, this.props.index)} />
         </TableCell>
