@@ -7,48 +7,48 @@ import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
 import glamorous from 'glamorous';
 
-import VoterRow from './VoterRow';
-import { saveVoters } from './actions';
+import DishRow from './DishRow';
+import { saveDishes } from './actions';
 
 type Props = {
-  voters: Array<Object>,
-  saveVoters: Function
+  dishes: Array<Object>,
+  saveDishes: Function
 };
 type State = {
-  voters: Array<Object>
+  dishes: Array<Object>
 };
 
-class VoterTable extends Component<Props, State> {
+class DishTable extends Component<Props, State> {
   state = {
-    voters: this.props.voters
+    dishes: this.props.dishes
   };
 
   formChange = (index: number, field: string, value: any) => {
-    let voters = this.state.voters;
-    let voter = { ...voters[index], [field]: value };
-    voters.splice(index, 1, voter);
+    let dishes = this.state.dishes;
+    let dish = { ...dishes[index], [field]: value };
+    dishes.splice(index, 1, dish);
 
-    this.setState({ voters });
+    this.setState({ dishes });
   };
 
-  deleteVoter = (index: number) => {
-    let voters = this.state.voters;
-    voters.splice(index, 1);
+  deleteDish = (index: number) => {
+    let dishes = this.state.dishes;
+    dishes.splice(index, 1);
 
-    this.setState({ voters });
+    this.setState({ dishes });
   };
 
-  addVoter = () => {
-    let voters = this.state.voters;
-    voters.push({ name: '', voted: false });
+  addDish = () => {
+    let dishes = this.state.dishes;
+    dishes.push({ name: '' });
 
-    this.setState({ voters });
+    this.setState({ dishes });
   };
 
   handleSubmit = (e: Event) => {
     e.preventDefault();
 
-    this.props.saveVoters(this.state.voters).then(response => {
+    this.props.saveDishes(this.state.dishes).then(response => {
       if (response) {
         console.log(response);
       }
@@ -66,19 +66,20 @@ class VoterTable extends Component<Props, State> {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Voted</TableCell>
+              <TableCell>Number</TableCell>
+              <TableCell>Title</TableCell>
+              <TableCell>Description</TableCell>
               <TableCell numeric>Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.state.voters.map((voter, i) => (
-              <VoterRow key={i} index={i} voter={voter} formChange={this.formChange} deleteVoter={this.deleteVoter} />
+            {this.state.dishes.map((dish, i) => (
+              <DishRow key={i} index={i} dish={dish} formChange={this.formChange} deleteDish={this.deleteDish} />
             ))}
           </TableBody>
         </Table>
         <TextRight>
-          <Button fab raised color="primary" onClick={this.addVoter}>
+          <Button fab raised color="primary" onClick={this.addDish}>
             <AddIcon />
           </Button>
         </TextRight>
@@ -88,10 +89,10 @@ class VoterTable extends Component<Props, State> {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ saveVoters }, dispatch);
+  return bindActionCreators({ saveDishes }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(VoterTable);
+export default connect(null, mapDispatchToProps)(DishTable);
 
 const TextRight = glamorous.div({
   textAlign: 'right'

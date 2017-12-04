@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { getVoters } from './actions';
-import { Container } from 'components/Layout';
 import Loader from 'components/Loader';
 import VoterTable from './VoterTable';
 

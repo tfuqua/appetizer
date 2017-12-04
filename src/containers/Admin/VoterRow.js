@@ -32,7 +32,7 @@ class VoterRow extends Component<Props> {
             fieldChange={this.props.formChange.bind(this, this.props.index)}
           />
         </TableCell>
-        <TableCell>
+        <TableCell numeric>
           <CancelIcon onClick={this.props.deleteVoter.bind(this, this.props.index)} />
         </TableCell>
       </TableRow>

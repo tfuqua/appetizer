@@ -8,7 +8,6 @@ import { fetchScores } from '../../socketListeners';
 import { Container } from 'components/Layout';
 import LeaderboardTable from './LeaderboardTable';
 import Loader from 'components/Loader';
-import Button from 'material-ui/Button';
 
 class Leaderboard extends Component<*> {
   componentDidMount() {

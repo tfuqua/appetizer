@@ -30,8 +30,7 @@ export function saveVoters(req, res) {
   });
 
   Voter.find()
-    .populate('votes')
-    .then(data => {
-      res.send(data);
-    });
+  .then(data => {
+    res.send(data);
+  });
 }

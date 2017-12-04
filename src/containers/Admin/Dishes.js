@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { getDishes } from './actions';
-import { Container } from 'components/Layout';
+import Loader from 'components/Loader';
+import DishTable from './DishTable';
 
 type Props = {
   getDishes: Function,
@@ -18,9 +19,9 @@ class Dishes extends Component<Props> {
 
   render() {
     return (
-      <Container>
-        <pre>{JSON.stringify(this.props.dishes, null, 2)}</pre>
-      </Container>
+      <div>
+        <div>{this.props.dishes ? <DishTable dishes={this.props.dishes} /> : <Loader />}</div>
+      </div>
     );
   }
 }

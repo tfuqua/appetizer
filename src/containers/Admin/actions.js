@@ -56,3 +56,16 @@ export function getDishes() {
       });
   };
 }
+
+export function saveDishes(dishes: Array<Object>) {
+  return (dispatch: Function) => {
+    return request(API_DISHES, {
+      method: 'POST',
+      body: JSON.stringify(dishes)
+    }).catch(error => {
+      Promise.resolve(error).then(err => {
+        dispatch(displayMessage(err, HEADER_LOCATION));
+      });
+    });
+  };
+}

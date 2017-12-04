@@ -17,7 +17,7 @@ class Input extends Component<Props> {
   render() {
     return (
       <TextField
-        label="Name"
+        label={this.props.label}
         placeholder={this.props.placeholder}
         value={this.props.value}
         onChange={this.handleChange(this.props.name)}
