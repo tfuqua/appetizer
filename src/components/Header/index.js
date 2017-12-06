@@ -20,7 +20,9 @@ class Header extends Component<*> {
           <div>
             {this.props.location.pathname !== '/vote' && (
               <Link to="/vote">
-                <Button raised>Vote</Button>
+                <Button raised color="accent">
+                  Vote
+                </Button>
               </Link>
             )}
           </div>

@@ -3,10 +3,11 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Card from 'material-ui/Card';
-import Button from 'material-ui/Button';
+import Grid from 'material-ui/Grid';
+import Avatar from 'material-ui/Avatar';
+import glamorous from 'glamorous';
 
-import { vote } from '../../socketListeners';
-import { getVoters } from './actions';
+import { getVoters, receiveVoter } from './actions';
 import { Container } from 'components/Layout';
 import Loader from 'components/Loader';
 
@@ -15,32 +16,31 @@ class Vote extends Component<*> {
     this.props.getVoters();
   }
 
-  vote = () => {
-    this.props.vote();
+  navigate = (voter: Object) => {
+    this.props.receiveVoter(voter);
+    this.props.history.push(`/vote/${voter.id}`);
   };
 
   render() {
     return (
       <div>
         <Container>
-          <Card>
-            <Container>
-              <Button raised onClick={this.vote}>
-                Vote
-              </Button>
-              {this.props.voters ? (
-                <div>
-                  {this.props.voters.map((voter, i) => (
-                    <div>
-                      <h3>{voter.name}</h3>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <Loader />
-              )}
-            </Container>
-          </Card>
+          <div>
+            {this.props.voters ? (
+              <Grid container>
+                {this.props.voters.map((voter, i) => (
+                  <Grid item xs={12} sm={6} md={4} lg={3}>
+                    <VoterCard onClick={() => this.navigate(voter)}>
+                      <Avatar className="avatar">{voter.name.charAt(0)}</Avatar>
+                      <H3>{voter.name}</H3>
+                    </VoterCard>
+                  </Grid>
+                ))}
+              </Grid>
+            ) : (
+              <Loader />
+            )}
+          </div>
         </Container>
       </div>
     );
@@ -54,7 +54,26 @@ function mapStateToProps(store, props) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getVoters, vote }, dispatch);
+  return bindActionCreators({ getVoters, receiveVoter }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Vote);
+
+const VoterCard = glamorous(Card)({
+  padding: '16px',
+  textAlign: 'center',
+  '& .avatar': {
+    margin: '8px auto'
+  },
+  '&:hover': {
+    cursor: 'pointer',
+    background: '#ECECEC'
+  }
+});
+
+const H3 = glamorous.h3({
+  textTransform: 'uppercase',
+  color: '#777',
+  fontSize: '20px',
+  margin: '20px 0 10px'
+});

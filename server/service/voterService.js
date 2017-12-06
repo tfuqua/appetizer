@@ -3,6 +3,7 @@ import Voter from '../models/Voter';
 //Get Voters
 export function getVoters(req, res) {
   Voter.find()
+    .sort('name')
     .then(data => {
       res.send(data);
     })
@@ -29,8 +30,7 @@ export function saveVoters(req, res) {
     });
   });
 
-  Voter.find()
-  .then(data => {
+  Voter.find().then(data => {
     res.send(data);
   });
 }

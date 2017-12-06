@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Card from 'material-ui/Card';
+import glamorous from 'glamorous';
 
 import { fetchScores } from '../../socketListeners';
 import { Container } from 'components/Layout';
@@ -19,7 +20,15 @@ class Leaderboard extends Component<*> {
       <div>
         <Container>
           <Card>
-            <Container>{this.props.scores ? <LeaderboardTable scores={this.props.scores} /> : <Loader />}</Container>
+            <Container>
+              {this.props.scores ? (
+                <TableWrapper>
+                  <LeaderboardTable scores={this.props.scores} />
+                </TableWrapper>
+              ) : (
+                <Loader />
+              )}
+            </Container>
           </Card>
         </Container>
       </div>
@@ -38,3 +47,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Leaderboard);
+
+const TableWrapper = glamorous.div({
+  overflowX: 'auto',
+  webkitOverflowScrolling: 'touch'
+});

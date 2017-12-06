@@ -1,14 +1,22 @@
 // @flow
 import request from 'util/fetch';
 import { displayMessage, HEADER_LOCATION } from '../Message/actions';
-import { API_VOTERS } from '../../api';
+import { API_VOTERS, API_DISHES } from '../../api';
 
 export const GET_VOTERS = 'GET_VOTERS';
+export const GET_VOTER = 'GET_VOTER';
 
 function receiveVoters(voters) {
   return {
     type: GET_VOTERS,
     voters
+  };
+}
+
+export function receiveVoter(voter: Object) {
+  return {
+    type: GET_VOTER,
+    voter
   };
 }
 
@@ -21,5 +29,15 @@ export function getVoters() {
           dispatch(displayMessage(err, HEADER_LOCATION));
         });
       });
+  };
+}
+
+export function getDishes() {
+  return (dispatch: Function) => {
+    return request(API_DISHES).catch(error => {
+      Promise.resolve(error).then(err => {
+        dispatch(displayMessage(err, HEADER_LOCATION));
+      });
+    });
   };
 }

@@ -5,6 +5,7 @@ import routeLoader from './util/routeLoader';
 const Leaderboard = routeLoader(() => import(/* webpackChunkName: "Leaderboard" */ './containers/Leaderboard'));
 const Vote = routeLoader(() => import(/* webpackChunkName: "Vote" */ './containers/Vote'));
 const Admin = routeLoader(() => import(/* webpackChunkName: "Admin" */ './containers/Admin'));
+const Form = routeLoader(() => import(/* webpackChunkName: "Form" */ './containers/Form'));
 
 const routes = [
   {
@@ -14,7 +15,12 @@ const routes = [
   },
   {
     path: '/vote',
-    component: Vote
+    component: Vote,
+    exact: true
+  },
+  {
+    path: '/vote/:id',
+    component: Form
   },
   {
     path: '/admin',

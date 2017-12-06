@@ -8,7 +8,21 @@ const AppTheme = createMuiTheme({
     secondary: red
   },
   overrides: {
-    AppBar: {}
+    MuiAvatar: {
+      colorDefault: {
+        backgroundColor: green[500]
+      }
+    },
+    MuiButton: {
+      raisedPrimary: {
+        color: '#fff'
+      }
+    },
+    MuiTabs: {
+      root: {
+        background: '#f5f5f5'
+      }
+    }
   }
 });
 

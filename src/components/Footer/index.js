@@ -16,8 +16,9 @@ class Footer extends Component<*> {
 export default withRouter(Footer);
 
 const FooterWrapper = glamorous.div({
-  background: '#ECECEC',
+  background: '#fff',
   padding: '16px',
+  marginTop: '48px',
   textAlign: 'center',
   '& a': {
     color: '#666'
