@@ -3,6 +3,7 @@ import Dish from '../models/Dish';
 //Get Voters
 export function getDishes(req, res) {
   Dish.find()
+    .sort('number')
     .then(data => {
       res.send(data);
     })

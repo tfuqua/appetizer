@@ -30,18 +30,15 @@ export default function() {
 function createVoterData() {
   console.log('Creating Voter Data');
 
-  for (let i = 0; i < 8; i++) {
-    const voter = new Voter({
-      name: `Voter #${i}`,
-      voted: false
-    });
+  voters.forEach(v => {
+    const voter = new Voter(v);
 
     Voter.create(voter, error => {
       if (error) {
         console.log(error);
       }
     });
-  }
+  });
 
   console.log('Complete Creating Voter Data');
 }
@@ -49,7 +46,7 @@ function createVoterData() {
 function createDishData() {
   console.log('Creating Dish Data');
 
-  for (let i = 0; i < 21; i++) {
+  for (let i = 0; i < 11; i++) {
     const dish = new Dish({
       number: i,
       title: `Dish #${i}`,
@@ -111,3 +108,14 @@ function getRandomScore() {
 
   return Math.floor(Math.random() * (max - min)) + min;
 }
+
+const voters = [
+  { name: 'Donna', voted: false },
+  { name: 'Ty', voted: false },
+  { name: 'Susan', voted: false },
+  { name: 'Glenn', voted: false },
+  { name: 'Patrick', voted: false },
+  { name: 'Taylor', voted: false },
+  { name: 'Olin', voted: false },
+  { name: 'Linden', voted: false }
+];
