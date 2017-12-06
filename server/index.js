@@ -31,9 +31,9 @@ mongoose.connect(config.mongoURL, { useMongoClient: true }, error => {
 
   console.log('Connected to Mongo');
 
-  if (process.env.NODE_ENV === 'development') {
-    dummydata();
-  }
+  //if (process.env.NODE_ENV === 'development') {
+  dummydata();
+  //}
 });
 
 server.listen(config.port, () => {
