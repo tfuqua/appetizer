@@ -12,6 +12,16 @@ export function getVoters(req, res) {
     });
 }
 
+export function getVoterByID(req, res) {
+  Voter.findById(req.params.id)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    });
+}
+
 export function saveVoters(req, res) {
   if (!req.body) return res.sendStatus(400);
 

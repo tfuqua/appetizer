@@ -41,3 +41,15 @@ export function getDishes() {
     });
   };
 }
+
+export function getVoterByID(id: number) {
+  return (dispatch: Function) => {
+    return request(`${API_VOTERS}/${id}`)
+      .then(voter => dispatch(receiveVoter(voter)))
+      .catch(error => {
+        Promise.resolve(error).then(err => {
+          dispatch(displayMessage(err, HEADER_LOCATION));
+        });
+      });
+  };
+}

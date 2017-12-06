@@ -10,13 +10,16 @@ import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
 import glamorous from 'glamorous';
 
 import { Container } from 'components/Layout';
-import { getDishes } from '../Vote/actions';
+import { getDishes, getVoterByID } from '../Vote/actions';
 import Loader from 'components/Loader';
 
 type Props = {
   getDishes: Function,
-  voter: Object
+  getVoterByID: Function,
+  voter: Object,
+  match: Object
 };
+
 type State = {
   dishes: ?Array<Object>,
   activeStep: number
@@ -29,6 +32,7 @@ class VoteForm extends Component<Props, State> {
   };
 
   componentDidMount() {
+    this.props.getVoterByID(this.props.match.params.id);
     this.props.getDishes().then(dishes => {
       this.setState({ dishes });
     });
@@ -97,7 +101,7 @@ function mapStateToProps(store, props) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getDishes }, dispatch);
+  return bindActionCreators({ getDishes, getVoterByID }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(VoteForm);
