@@ -29,6 +29,8 @@ mongoose.connect(config.mongoURL, { useMongoClient: true }, error => {
     throw error;
   }
 
+  console.log('Connected to Mongo');
+
   if (process.env.NODE_ENV === 'development') {
     dummydata();
   }
