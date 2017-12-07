@@ -2,7 +2,7 @@ import openSocket from 'socket.io-client';
 import { receiveLeaderboard } from 'containers/Leaderboard/actions';
 
 const socket = openSocket(
-  process.env.NODE_ENV === 'development' ? 'https://localhost:8000' : 'https://app.taylorfuqua.com'
+  process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : 'https://app.taylorfuqua.com'
 );
 
 export default function(dispatch, getState) {
