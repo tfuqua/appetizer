@@ -1,15 +1,33 @@
 import Voter from '../models/Voter';
 
+const VOTERS_SAVED = 'Voters Saved Sucessfully';
+
 //Get Voters
 export function getVoters(req, res) {
-  Voter.find()
-    .sort('name')
-    .then(data => {
-      res.send(data);
-    })
-    .catch(error => {
-      res.status(500).send(error);
-    });
+  let { voted } = req.query;
+
+  console.log(voted);
+  if (voted !== undefined) {
+    Voter.find()
+      .where('voted')
+      .equals(voted)
+      .sort('name')
+      .then(data => {
+        res.send(data);
+      })
+      .catch(error => {
+        res.status(500).send(error);
+      });
+  } else {
+    Voter.find()
+      .sort('name')
+      .then(data => {
+        res.send(data);
+      })
+      .catch(error => {
+        res.status(500).send(error);
+      });
+  }
 }
 
 export function getVoterByID(req, res) {
@@ -40,7 +58,5 @@ export function saveVoters(req, res) {
     });
   });
 
-  Voter.find().then(data => {
-    res.send(data);
-  });
+  res.status(200).send({ message: VOTERS_SAVED });
 }

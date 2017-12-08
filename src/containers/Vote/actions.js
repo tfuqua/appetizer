@@ -22,7 +22,7 @@ export function receiveVoter(voter: Object) {
 
 export function getVoters() {
   return (dispatch: Function) => {
-    return request(API_VOTERS)
+    return request(`${API_VOTERS}?voted=false`)
       .then(voters => dispatch(receiveVoters(voters)))
       .catch(error => {
         Promise.resolve(error).then(err => {

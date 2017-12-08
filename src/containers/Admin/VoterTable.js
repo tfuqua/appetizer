@@ -7,12 +7,14 @@ import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
 import glamorous from 'glamorous';
 
+import { displayMessage, TOAST_RIGHT } from 'containers/Message/actions';
 import VoterRow from './VoterRow';
 import { saveVoters } from './actions';
 
 type Props = {
   voters: Array<Object>,
-  saveVoters: Function
+  saveVoters: Function,
+  displayMessage: Function
 };
 type State = {
   voters: Array<Object>
@@ -50,7 +52,7 @@ class VoterTable extends Component<Props, State> {
 
     this.props.saveVoters(this.state.voters).then(response => {
       if (response) {
-        console.log(response);
+        this.props.displayMessage(response.message, TOAST_RIGHT);
       }
     });
   };
@@ -88,7 +90,7 @@ class VoterTable extends Component<Props, State> {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ saveVoters }, dispatch);
+  return bindActionCreators({ saveVoters, displayMessage }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(VoterTable);

@@ -7,13 +7,16 @@ import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
 import glamorous from 'glamorous';
 
+import { displayMessage, TOAST_RIGHT } from 'containers/Message/actions';
 import DishRow from './DishRow';
 import { saveDishes } from './actions';
 
 type Props = {
   dishes: Array<Object>,
-  saveDishes: Function
+  saveDishes: Function,
+  displayMessage: Function
 };
+
 type State = {
   dishes: Array<Object>
 };
@@ -50,7 +53,7 @@ class DishTable extends Component<Props, State> {
 
     this.props.saveDishes(this.state.dishes).then(response => {
       if (response) {
-        console.log(response);
+        this.props.displayMessage(response.message, TOAST_RIGHT);
       }
     });
   };
@@ -89,7 +92,7 @@ class DishTable extends Component<Props, State> {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ saveDishes }, dispatch);
+  return bindActionCreators({ saveDishes, displayMessage }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(DishTable);

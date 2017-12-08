@@ -1,5 +1,7 @@
 import Dish from '../models/Dish';
 
+const DISHES_SAVED = 'Dishes Saved Sucessfully';
+
 //Get Voters
 export function getDishes(req, res) {
   Dish.find()
@@ -30,7 +32,5 @@ export function saveDishes(req, res) {
     });
   });
 
-  Dish.find().then(data => {
-    res.send(data);
-  });
+  res.status(200).send({ message: DISHES_SAVED });
 }
