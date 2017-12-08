@@ -2,13 +2,16 @@
 import React, { Component } from 'react';
 import glamorous from 'glamorous';
 import Snackbar from 'material-ui/Snackbar';
-import IconButton from 'material-ui/IconButton';
-import CloseIcon from 'material-ui-icons/Close';
 import Slide from 'material-ui/transitions/Slide';
 import SuccessIcon from 'material-ui-icons/CheckCircle';
-import ErrorIcon from 'material-ui-icons/ThumbDown';
 
-class ToastMessage extends Component {
+type Props = {
+  hideMessage: Function
+};
+type State = {
+  open: boolean
+};
+class ToastMessage extends Component<Props, State> {
   state = { open: true };
 
   handleRequestClose = (event: Event, reason: string) => {
@@ -27,25 +30,19 @@ class ToastMessage extends Component {
   };
 
   render() {
-    let type = this.props.message.type || 'ERROR';
     return (
       <Snackbar
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         open={this.state.open}
         autoHideDuration={3500}
         transition={Transition}
         onRequestClose={this.handleRequestClose}
         message={
-          <MessageWrapper type={type}>
-            {type === 'ERROR' ? <ErrorIcon /> : <SuccessIcon />}
+          <MessageWrapper>
+            <SuccessIcon />
             {this.props.message.message}
           </MessageWrapper>
         }
-        action={[
-          <IconButton key="close" aria-label="Close" color="inherit" onClick={this.handleRequestClose}>
-            <CloseIcon />
-          </IconButton>
-        ]}
       />
     );
   }
@@ -53,20 +50,14 @@ class ToastMessage extends Component {
 
 export default ToastMessage;
 
-const Transition = props => <Slide direction="up" {...props} />;
+const Transition = props => <Slide direction="left" {...props} />;
 
-const MessageWrapper = glamorous.span(
-  {
-    display: 'flex',
-    alignItems: 'center',
-    fontWeight: '300',
-    '& svg': {
-      marginRight: '8px'
-    }
-  },
-  props => ({
-    '& svg': {
-      color: props.type !== 'ERROR' ? '#FF504D' : '#FF504D'
-    }
-  })
-);
+const MessageWrapper = glamorous.span({
+  display: 'flex',
+  alignItems: 'center',
+  fontWeight: '300',
+  '& svg': {
+    marginRight: '8px',
+    color: '#21A761'
+  }
+});

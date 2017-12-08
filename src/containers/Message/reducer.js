@@ -6,9 +6,7 @@ function messageReducer(state: Object = {}, action: { type: string, message: Obj
     case SHOW_MESSAGE:
       return {
         message: {
-          type: action.message.type,
-          message: action.message.message,
-          details: action.message.details,
+          message: action.message,
           container: action.container,
           show: true
         }
@@ -16,7 +14,6 @@ function messageReducer(state: Object = {}, action: { type: string, message: Obj
     case HIDE_MESSAGE:
       return {
         message: {
-          type: '',
           message: '',
           show: false
         }

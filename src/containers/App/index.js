@@ -5,6 +5,8 @@ import glamorous from 'glamorous';
 import routes from '../../routes';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+import Message from 'containers/Message';
+import { HEADER_LOCATION, TOAST_RIGHT } from 'containers/Message/actions';
 
 class App extends Component {
   render() {
@@ -12,6 +14,9 @@ class App extends Component {
       <AppWrapper>
         <Content>
           <Header />
+          <Message container={TOAST_RIGHT} />
+          <Message container={HEADER_LOCATION} />
+
           <Switch>
             {routes.map(
               (route, i) =>
