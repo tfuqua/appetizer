@@ -17,8 +17,8 @@ socketInit(server); //Setup Websocket
 
 app.use(bodyParser.json());
 app.use('/api', routes);
-app.use('/static', express.static(path.join(__dirname, '../static')));
 
+app.use('/', express.static(path.join(__dirname, '../')));
 app.use('*', (req, res) => res.send(markup));
 
 // MongoDB Connection
