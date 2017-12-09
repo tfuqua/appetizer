@@ -12,10 +12,8 @@ function socketInit(server) {
     });
 
     socket.on('vote', data => {
-      vote().then(result => {
-        getLeaderboardData().then(results => {
-          socket.broadcast.emit('getScores', results);
-        });
+      getLeaderboardData().then(results => {
+        socket.broadcast.emit('getScores', results);
       });
     });
   });

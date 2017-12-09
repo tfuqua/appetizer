@@ -72,7 +72,7 @@ export function saveVote(req, res) {
   const votes = req.body;
 
   votes.forEach(v => {
-    let vote = new Vote({ ...v });
+    let vote = new Vote(v);
 
     vote.save((err, data) => {
       if (err) {
