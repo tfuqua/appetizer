@@ -13,19 +13,28 @@ class Header extends Component<*> {
       <AppBar position="static">
         <HeaderWrapper>
           <Lights />
-          <div />
 
           <div>
-            {this.props.location.pathname !== '/vote' ? (
+            {this.props.location.pathname === '/vote' && (
+              <Link to="/">
+                <Button raised color="accent">
+                  Leaderboard
+                </Button>
+              </Link>
+            )}
+
+            {this.props.location.pathname === '/' && (
               <Link to="/vote">
                 <Button raised color="accent">
                   Vote
                 </Button>
               </Link>
-            ) : (
+            )}
+
+            {this.props.location.pathname.startsWith('/vote/') && (
               <Link to="/">
                 <Button raised color="accent">
-                  Leaderboard
+                  Quit Voting
                 </Button>
               </Link>
             )}
@@ -43,7 +52,7 @@ const HeaderWrapper = glamorous.div({
   padding: '50px 8px 8px',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between',
+  justifyContent: 'flex-end',
   '& a > p': {
     color: '#fff'
   }

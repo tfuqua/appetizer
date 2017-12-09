@@ -6,6 +6,7 @@ const Leaderboard = routeLoader(() => import(/* webpackChunkName: "Leaderboard" 
 const Vote = routeLoader(() => import(/* webpackChunkName: "Vote" */ './containers/Vote'));
 const Admin = routeLoader(() => import(/* webpackChunkName: "Admin" */ './containers/Admin'));
 const Form = routeLoader(() => import(/* webpackChunkName: "Form" */ './containers/Form'));
+const Success = routeLoader(() => import(/* webpackChunkName: "Success" */ './containers/Success'));
 
 const routes = [
   {
@@ -25,6 +26,10 @@ const routes = [
   {
     path: '/admin',
     component: Admin
+  },
+  {
+    path: '/success',
+    component: Success
   }
 ];
 

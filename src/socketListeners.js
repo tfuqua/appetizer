@@ -17,7 +17,7 @@ export function fetchScores() {
   };
 }
 
-export function vote() {
+export function emitVote() {
   return (dispatch: Function) => {
     socket.emit('vote');
   };

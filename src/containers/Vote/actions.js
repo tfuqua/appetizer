@@ -1,7 +1,7 @@
 // @flow
 import request from 'util/fetch';
 import { displayMessage, HEADER_LOCATION } from '../Message/actions';
-import { API_VOTERS, API_DISHES } from '../../api';
+import { API_VOTE, API_VOTERS, API_DISHES } from '../../api';
 
 export const GET_VOTERS = 'GET_VOTERS';
 export const GET_VOTER = 'GET_VOTER';
@@ -51,5 +51,18 @@ export function getVoterByID(id: number) {
           dispatch(displayMessage(err, HEADER_LOCATION));
         });
       });
+  };
+}
+
+export function vote(votes: Array<Object>) {
+  return (dispatch: Function) => {
+    return request(API_VOTE, {
+      method: 'POST',
+      body: JSON.stringify(votes)
+    }).catch(error => {
+      Promise.resolve(error).then(err => {
+        dispatch(displayMessage(err, HEADER_LOCATION));
+      });
+    });
   };
 }

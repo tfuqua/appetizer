@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
+import Card from 'material-ui/Card';
+import Button from 'material-ui/Button';
 import glamorous from 'glamorous';
 
 import routes from '../../routes';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import Message from 'containers/Message';
+import { Container } from 'components/Layout';
 import { HEADER_LOCATION, TOAST_RIGHT } from 'containers/Message/actions';
 
 class App extends Component {
@@ -22,6 +25,21 @@ class App extends Component {
               (route, i) =>
                 route.layout ? React.createElement(route.layout, { key: i, ...route }) : <Route key={i} {...route} />
             )}
+            <Route
+              render={() => (
+                <Card>
+                  <Container>
+                    <PageNotFound>
+                      <h1>Page Not Found</h1>
+
+                      <Link to="/">
+                        <Button color="accent">Return to Home Page</Button>
+                      </Link>
+                    </PageNotFound>
+                  </Container>
+                </Card>
+              )}
+            />
           </Switch>
         </Content>
 
@@ -40,4 +58,9 @@ const AppWrapper = glamorous.div({
 });
 const Content = glamorous.div({
   flex: 1
+});
+
+const PageNotFound = glamorous.div({
+  textAlign: 'center',
+  paddingBottom: '50px'
 });

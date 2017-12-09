@@ -20,7 +20,7 @@ export default function() {
         .then(() => {
           Vote.count().exec((err, count) => {
             if (count === 0) {
-              createVoteData();
+              //createVoteData();
             }
           });
         });
@@ -46,7 +46,7 @@ function createVoterData() {
 function createDishData() {
   console.log('Creating Dish Data');
 
-  for (let i = 0; i < 11; i++) {
+  for (let i = 0; i < 6; i++) {
     const dish = new Dish({
       number: i,
       title: `Dish #${i}`,

@@ -2,33 +2,38 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { LinearProgress } from 'material-ui/Progress';
 import Card from 'material-ui/Card';
-import MobileStepper from 'material-ui/MobileStepper';
-import Button from 'material-ui/Button';
-import KeyboardArrowLeft from 'material-ui-icons/KeyboardArrowLeft';
-import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
+import { emitVote } from '../../socketListeners';
 import glamorous from 'glamorous';
 
-import { Container } from 'components/Layout';
-import { getDishes, getVoterByID } from '../Vote/actions';
+import { displayMessage, TOAST_RIGHT } from 'containers/Message/actions';
+import DishForm from './DishForm';
+import { vote, getDishes, getVoterByID } from '../Vote/actions';
 import Loader from 'components/Loader';
 
 type Props = {
   getDishes: Function,
   getVoterByID: Function,
+  displayMessage: Function,
+  emitVote: Function,
+  vote: Function,
   voter: Object,
-  match: Object
+  match: Object,
+  history: Object
 };
 
 type State = {
-  dishes: ?Array<Object>,
-  activeStep: number
+  dishes: Array<Object>,
+  activeStep: number,
+  votes: Array<Object>
 };
 
 class VoteForm extends Component<Props, State> {
   state = {
-    dishes: null,
-    activeStep: 0
+    dishes: [],
+    activeStep: 0,
+    votes: []
   };
 
   componentDidMount() {
@@ -37,6 +42,23 @@ class VoteForm extends Component<Props, State> {
       this.setState({ dishes });
     });
   }
+
+  addVote = (vote: Object) => {
+    let votes = this.state.votes;
+    votes.push(vote);
+
+    if (this.state.dishes.length > this.state.activeStep + 1) {
+      this.setState({ votes, activeStep: this.state.activeStep + 1 });
+    } else {
+      this.props.vote(votes).then(response => {
+        if (response) {
+          this.props.history.push('/success');
+          this.props.displayMessage(response.message, TOAST_RIGHT);
+          this.props.emitVote();
+        }
+      });
+    }
+  };
 
   handleNext = () => {
     this.setState({
@@ -52,44 +74,32 @@ class VoteForm extends Component<Props, State> {
 
   render() {
     return (
-      <div>
-        <Container>
-          <Card>
-            <VoteWrapper>
-              {this.state.dishes && this.props.voter ? (
-                <div>
-                  <h3>Hey {this.props.voter.name}!</h3>
-                  <pre>{JSON.stringify(this.props.voter, null, 2)}</pre>
+      <Card>
+        <VoteWrapper>
+          {this.props.voter && this.state.dishes.length > 0 ? (
+            <div>
+              <DishForm
+                addVote={this.addVote}
+                skipVote={this.handleNext}
+                dish={this.state.dishes[this.state.activeStep]}
+              />
 
-                  <MobileStepper
-                    type="progress"
-                    steps={this.state.dishes.length}
-                    position="static"
-                    activeStep={this.state.activeStep}
-                    nextButton={
-                      <Button
-                        dense
-                        onClick={this.handleNext}
-                        disabled={this.state.activeStep === this.state.dishes.length}>
-                        Next
-                        <KeyboardArrowRight />
-                      </Button>
-                    }
-                    backButton={
-                      <Button dense onClick={this.handleBack} disabled={this.state.activeStep === 0}>
-                        <KeyboardArrowLeft />
-                        Back
-                      </Button>
-                    }
-                  />
-                </div>
-              ) : (
-                <Loader />
-              )}
-            </VoteWrapper>
-          </Card>
-        </Container>
-      </div>
+              <br />
+              <br />
+              <Progress
+                color="primary"
+                mode="determinate"
+                value={this.state.activeStep / this.state.dishes.length * 100}
+              />
+              <TextCenter>
+                {this.state.activeStep + 1} of {this.state.dishes.length} dishes
+              </TextCenter>
+            </div>
+          ) : (
+            <Loader />
+          )}
+        </VoteWrapper>
+      </Card>
     );
   }
 }
@@ -101,11 +111,22 @@ function mapStateToProps(store, props) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getDishes, getVoterByID }, dispatch);
+  return bindActionCreators({ vote, emitVote, getDishes, getVoterByID, displayMessage }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(VoteForm);
 
 const VoteWrapper = glamorous.div({
+  padding: '16px'
+});
+
+const Progress = glamorous(LinearProgress)({
+  height: '10px'
+});
+
+const TextCenter = glamorous.div({
+  textAlign: 'center',
+  fontSize: '20px',
+  fontWeight: 'bold',
   padding: '16px'
 });
