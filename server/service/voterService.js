@@ -82,7 +82,9 @@ export function saveVote(req, res) {
     });
   });
 
-  markVoterVoted(votes[0].voter);
+  if (votes[0]) {
+    markVoterVoted(votes[0].voter);
+  }
 
   res.status(200).send({ message: VOTE_SAVED });
 }
