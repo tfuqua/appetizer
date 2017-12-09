@@ -61,9 +61,17 @@ class VoteForm extends Component<Props, State> {
   };
 
   handleNext = () => {
-    this.setState({
-      activeStep: this.state.activeStep + 1
-    });
+    if (this.state.dishes.length > this.state.activeStep + 1) {
+      this.setState({ activeStep: this.state.activeStep + 1 });
+    } else {
+      this.props.vote(this.state.votes).then(response => {
+        if (response) {
+          this.props.history.push('/success');
+          this.props.displayMessage(response.message, TOAST_RIGHT);
+          this.props.emitVote();
+        }
+      });
+    }
   };
 
   handleBack = () => {
