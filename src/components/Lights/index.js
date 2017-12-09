@@ -8,35 +8,35 @@ class Lights extends Component<*> {
     return (
       <LightWrapper>
         <LightList>
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
-          <LI />
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
+          <LI> </LI>
         </LightList>
       </LightWrapper>
     );
@@ -48,12 +48,11 @@ export default Lights;
 const width = 12;
 const height = 28;
 const spacing = 25;
-const spread = 3;
+const spread = 1;
 const lightOpacity = 0.4;
 
 const LightWrapper = glamorous.div({
-  marginTop: '-6px',
-  marginLeft: '-3%'
+  marginTop: '-6px'
 });
 
 const LightList = glamorous.ul({
@@ -65,7 +64,40 @@ const LightList = glamorous.ul({
   margin: '-15px 0 0 0',
   padding: 0,
   pointerEvents: 'none',
-  width: '106%'
+  width: '100%'
+});
+
+let flash1 = css.keyframes({
+  '0%, 100%': {
+    background: 'rgba(0,247,165, 1)',
+    boxShadow: `0px ${height / 6}px ${width * 2}px ${spread}px rgba(0,247,165,1)`
+  },
+  '50%': {
+    background: `rgba(0,247,165, 0.4)`,
+    boxShadow: `0px ${height / 6}px ${width * 2}px ${spread}px rgba(0,247,165,0.2)`
+  }
+});
+
+let flash2 = css.keyframes({
+  '0%, 100%': {
+    background: 'rgba(0,255,255, 1)',
+    boxShadow: `0px ${height / 6}px ${width * 2}px ${spread}px rgba(0,255,255,1)`
+  },
+  '50%': {
+    background: `rgba(0,255,255, 0.4)`,
+    boxShadow: `0px ${height / 6}px ${width * 2}px ${spread}px rgba(0,255,255,0.2)`
+  }
+});
+
+let flash3 = css.keyframes({
+  '0%, 100%': {
+    background: 'rgba(247,0,148,1)',
+    boxShadow: `0px ${height / 6}px ${width * 2}px ${spread}px rgba(247,0,148,1)`
+  },
+  '50%': {
+    background: `rgba(0,255,255, 0.4)`,
+    boxShadow: `0px ${height / 6}px ${width * 2}px ${spread}px rgba(247,0,148,0.2)`
+  }
 });
 
 const LI = glamorous.li({
@@ -78,20 +110,17 @@ const LI = glamorous.li({
   margin: spacing,
   display: 'inline-block',
   background: 'rgba(0,247,165,1)',
-  boxShadow: `0px ${height / 6} ${width * 2} ${spread} rgba(0,247,165,1)`,
-  //animationName: flash1,
-  animationDuration: '0.4s',
+  boxShadow: `0px ${height / 6}px ${width * 2}px ${spread}px rgba(0,247,165,1)`,
+  animation: `${flash1} 2s infinite ease-in-out alternate`,
   '&:nth-child(2n+1)': {
     background: 'rgba(0,255,255,1)',
-    boxShadow: `0px ${height / 6} ${width * 2} ${spread} rgba(0,255,255,0.5)`,
-    //animationName: flash1,
-    animationDuration: '0.4s'
+    boxShadow: `0px ${height / 6}px ${width * 2}px ${spread}px rgba(0,255,255,0.5)`,
+    animation: `${flash2} 0.4s infinite ease-in-out alternate`
   },
   '&:nth-child(4n+2)': {
     background: 'rgba(247,0,148,1)',
-    boxShadow: `0px ${height / 6} ${width * 2} ${spread} rgba(247,0,148,1)`,
-    //animationName: flash1,
-    animationDuration: '1.1s'
+    boxShadow: `0px ${height / 6}px ${width * 2}px ${spread}px rgba(247,0,148,1)`,
+    animation: `${flash3} 1.1s infinite ease-in-out alternate`
   },
   '&:nth-child(odd)': {
     animationDuration: '1.8s'
