@@ -1,5 +1,5 @@
 import SocketIO from 'socket.io';
-import { getLeaderboardData, vote } from './service/leaderboardService';
+import { getLeaderboardData } from './service/leaderboardService';
 
 function socketInit(server) {
   const io = new SocketIO(server);

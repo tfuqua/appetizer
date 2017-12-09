@@ -50,7 +50,9 @@ const height = 28;
 const spacing = 25;
 const spread = 1;
 
-const LightWrapper = glamorous.div({});
+const LightWrapper = glamorous.div({
+  overflowX: 'hidden'
+});
 
 const LightList = glamorous.ul({
   zIndex: 1000,
@@ -58,11 +60,13 @@ const LightList = glamorous.ul({
   whiteSpace: 'nowrap',
   position: 'absolute',
   top: 0,
-  left: -16,
+  left: 0,
   margin: 0,
   padding: 0,
   pointerEvents: 'none',
-  width: '100%'
+  width: '100%',
+  overflowX: 'hidden',
+  paddingBottom: '16px'
 });
 
 let flash1 = css.keyframes({
@@ -150,38 +154,6 @@ const LI = glamorous.li({
     content: 'none'
   },
   '&:first-child': {
-    marginLeft: spacing
+    marginLeft: -32
   }
 });
-
-/*
-const flash1 = css.keyframes({
-  '0%, 100%': {
-    background: 'rgba(0,247,165,1)',
-    boxShadow: `0px ${height / 6} ${width * 2} ${spread} rgba(0,247,165,1)`
-  },
-  '50%': {
-    background: `rgba(0,247,165,${lightOpacity}`,
-    boxShadow: `0px ${height / 6} ${width * 2} ${spread} rgba(0,247,165,0.2)`
-  }
-});*/
-
-/*
-@keyframes flash-1 { 
-    0%, 100% { background: rgba(0,247,165,1);
-    box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(0,247,165,1);} 
-    50% { background: rgba(0,247,165,$light-off-opacity);
-    box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(0,247,165,0.2);}
-}
-@keyframes flash-2 { 
-    0%, 100% { background: rgba(0,255,255,1);
-    box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(0,255,255,1);} 
-    50% { background: rgba(0,255,255,$light-off-opacity);
-    box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(0,255,255,0.2);}
-}
-@keyframes flash-3 { 
-    0%, 100% { background: rgba(247,0,148,1);
-    box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(247,0,148,1);} 
-    50% { background: rgba(247,0,148,$light-off-opacity);
-    box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(247,0,148,0.2);}
-}*/

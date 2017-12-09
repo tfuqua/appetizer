@@ -33,7 +33,9 @@ class App extends Component {
                       <h1>Page Not Found</h1>
 
                       <Link to="/">
-                        <Button color="accent">Return to Home Page</Button>
+                        <Button raised color="accent">
+                          Return to Home Page
+                        </Button>
                       </Link>
                     </PageNotFound>
                   </Container>
