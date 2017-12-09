@@ -18,19 +18,17 @@ class Leaderboard extends Component<*> {
   render() {
     return (
       <div>
-        <Container>
-          <Card>
-            <Container>
-              {this.props.scores ? (
-                <TableWrapper>
-                  <LeaderboardTable scores={this.props.scores} />
-                </TableWrapper>
-              ) : (
-                <Loader />
-              )}
-            </Container>
-          </Card>
-        </Container>
+        <Card>
+          <Container>
+            {this.props.scores ? (
+              <TableWrapper>
+                <LeaderboardTable scores={this.props.scores} />
+              </TableWrapper>
+            ) : (
+              <Loader />
+            )}
+          </Container>
+        </Card>
       </div>
     );
   }

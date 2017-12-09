@@ -6,7 +6,6 @@ const VOTERS_SAVED = 'Voters Saved Sucessfully';
 export function getVoters(req, res) {
   let { voted } = req.query;
 
-  console.log(voted);
   if (voted !== undefined) {
     Voter.find()
       .where('voted')

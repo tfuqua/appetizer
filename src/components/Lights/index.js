@@ -49,19 +49,17 @@ const width = 12;
 const height = 28;
 const spacing = 25;
 const spread = 1;
-const lightOpacity = 0.4;
 
-const LightWrapper = glamorous.div({
-  marginTop: '-6px'
-});
+const LightWrapper = glamorous.div({});
 
 const LightList = glamorous.ul({
   zIndex: 1000,
   textAlign: 'center',
   whiteSpace: 'nowrap',
-  overflow: 'hidden',
   position: 'absolute',
-  margin: '-15px 0 0 0',
+  top: 0,
+  left: -16,
+  margin: 0,
   padding: 0,
   pointerEvents: 'none',
   width: '100%'
@@ -107,7 +105,7 @@ const LI = glamorous.li({
   width: width,
   height: height,
   borderRadius: '50%',
-  margin: spacing,
+  margin: `5px ${spacing}px 0`,
   display: 'inline-block',
   background: 'rgba(0,247,165,1)',
   boxShadow: `0px ${height / 6}px ${width * 2}px ${spread}px rgba(0,247,165,1)`,
