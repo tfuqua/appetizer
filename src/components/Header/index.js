@@ -13,28 +13,34 @@ class Header extends Component<*> {
       <AppBar position="static">
         <HeaderWrapper>
           <Lights />
+          <Title>Xmas Appetizer Contest</Title>
           <div>
-            <p>
-              <font size="5" color="#94192B"><b>St. Clair Xmas Appetizer Contest</b></font>
-            </p>
-          </div>
-          <div>
-            {this.props.location.pathname !== '/vote' ? (
+            {this.props.location.pathname === '/vote' && (
+              <Link to="/">
+                <Button raised color="accent">
+                  Leaderboard
+                </Button>
+              </Link>
+            )}
+
+            {this.props.location.pathname === '/' && (
               <Link to="/vote">
                 <Button raised color="accent">
                   Vote
                 </Button>
               </Link>
-            ) : (
-                <Link to="/">
-                  <Button raised color="accent">
-                    Leaderboard
+            )}
+
+            {this.props.location.pathname.startsWith('/vote/') && (
+              <Link to="/">
+                <Button raised color="accent">
+                  Quit Voting
                 </Button>
-                </Link>
-              )}
+              </Link>
+            )}
           </div>
         </HeaderWrapper>
-      </AppBar >
+      </AppBar>
     );
   }
 }
@@ -43,11 +49,15 @@ export default withRouter(Header);
 
 const HeaderWrapper = glamorous.div({
   minHeight: 104,
+  overflow: 'hidden',
   padding: '50px 8px 8px',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between',
-  '& a > p': {
-    color: '#fff'
-  }
+  justifyContent: 'space-between'
+});
+
+const Title = glamorous.div({
+  color: '#94192B',
+  fontSize: '20px',
+  fontWeight: 'bold'
 });

@@ -6,39 +6,37 @@ import glamorous from 'glamorous';
 class Lights extends Component<*> {
   render() {
     return (
-      <LightWrapper>
-        <LightList>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-          <LI> </LI>
-        </LightList>
-      </LightWrapper>
+      <LightList>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+        <LI> </LI>
+      </LightList>
     );
   }
 }
@@ -49,10 +47,6 @@ const width = 12;
 const height = 28;
 const spacing = 25;
 const spread = 1;
-
-const LightWrapper = glamorous.div({
-  overflowX: 'hidden'
-});
 
 const LightList = glamorous.ul({
   zIndex: 1000,
