@@ -81,7 +81,9 @@
     "whatwg-fetch": "2.0.3"
   },
   "babel": {
-    "presets": ["react-app"]
+    "presets": [
+      "react-app"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
