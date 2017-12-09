@@ -49,6 +49,7 @@ export default withRouter(Header);
 
 const HeaderWrapper = glamorous.div({
   minHeight: 104,
+  overflow: 'hidden',
   padding: '50px 8px 8px',
   display: 'flex',
   alignItems: 'center',
