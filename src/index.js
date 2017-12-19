@@ -22,6 +22,14 @@ jss.options.insertionPoint = 'insertion-point-jss';
 const store = configureStore(window.__INITIAL_STATE__);
 addSocketListeners(store.dispatch, store.getState);
 
+//IE 11 startsWith Polyfill
+if (!String.prototype.startsWith) {
+  String.prototype.startsWith = function(searchString, position){
+    position = position || 0;
+    return this.substr(position, searchString.length) === searchString;
+};
+
+
 ReactDOM.render(
   <Provider store={store}>
     <JssProvider jss={jss}>
