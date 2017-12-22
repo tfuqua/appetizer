@@ -1,6 +1,5 @@
 //@flow
 import React, { Component } from 'react';
-import glamorous from 'glamorous';
 import Gallery from 'react-grid-gallery';
 
 import { Container } from 'components/Layout';
