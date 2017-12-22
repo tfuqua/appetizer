@@ -69,7 +69,7 @@ class VoterTable extends Component<Props, State> {
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
-              <TableCell>Voted</TableCell>
+              <TableCell numeric>Voted</TableCell>
               <TableCell numeric>Action</TableCell>
             </TableRow>
           </TableHead>
@@ -80,6 +80,7 @@ class VoterTable extends Component<Props, State> {
           </TableBody>
         </Table>
         <TextRight>
+          <br />
           <Button fab raised color="primary" onClick={this.addVoter}>
             <AddIcon />
           </Button>

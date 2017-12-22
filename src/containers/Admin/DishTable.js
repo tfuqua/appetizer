@@ -60,7 +60,7 @@ class DishTable extends Component<Props, State> {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} encType="multipart/form-data">
         <TextRight>
           <Button raised color="primary" type="submit">
             Save
@@ -69,9 +69,9 @@ class DishTable extends Component<Props, State> {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Number</TableCell>
               <TableCell>Title</TableCell>
               <TableCell>Description</TableCell>
+              <TableCell>Image</TableCell>
               <TableCell numeric>Action</TableCell>
             </TableRow>
           </TableHead>
@@ -82,6 +82,7 @@ class DishTable extends Component<Props, State> {
           </TableBody>
         </Table>
         <TextRight>
+          <br />
           <Button fab raised color="primary" onClick={this.addDish}>
             <AddIcon />
           </Button>

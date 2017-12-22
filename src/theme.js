@@ -25,7 +25,7 @@ const AppTheme = createMuiTheme({
     },
     MuiTableCell: {
       paddingDefault: {
-        padding: '8px 4px'
+        padding: '8px 8px'
       }
     }
   }

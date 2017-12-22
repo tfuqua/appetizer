@@ -13,8 +13,11 @@ class Header extends Component<*> {
       <AppBar position="static">
         <HeaderWrapper>
           <Lights />
-          <Title>Xmas Appetizer Contest</Title>
           <div>
+            <Link to="/gallery">
+              <Button>Gallery</Button>
+            </Link>
+
             {this.props.location.pathname === '/vote' && (
               <Link to="/">
                 <Button raised color="accent">
@@ -31,10 +34,18 @@ class Header extends Component<*> {
               </Link>
             )}
 
-            {this.props.location.pathname.startsWith('/vote/') && (
+            {this.props.location.pathname.indexOf('/vote/') >= 0 && (
               <Link to="/">
                 <Button raised color="accent">
                   Quit Voting
+                </Button>
+              </Link>
+            )}
+
+            {this.props.location.pathname === '/admin' && (
+              <Link to="/">
+                <Button raised color="accent">
+                  Leaderboard
                 </Button>
               </Link>
             )}
@@ -53,11 +64,5 @@ const HeaderWrapper = glamorous.div({
   padding: '50px 8px 8px',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between'
-});
-
-const Title = glamorous.div({
-  color: '#94192B',
-  fontSize: '20px',
-  fontWeight: 'bold'
+  justifyContent: 'flex-end'
 });

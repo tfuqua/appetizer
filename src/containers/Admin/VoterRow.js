@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { TableCell, TableRow } from 'material-ui/Table';
 import CancelIcon from 'material-ui-icons/Cancel';
+import glamorous from 'glamorous';
 
 import Checkbox from 'components/Checkbox';
 import TextField from 'components/TextField';
@@ -17,27 +18,33 @@ class VoterRow extends Component<Props> {
   render() {
     return (
       <TableRow>
-        <TableCell>
+        <StyledTableCell>
           <TextField
             name="name"
             value={this.props.voter.name}
             fieldChange={this.props.formChange.bind(this, this.props.index)}
             placeholder="Enter Voter Name"
           />
-        </TableCell>
-        <TableCell>
+        </StyledTableCell>
+        <StyledTableCell numeric>
           <Checkbox
             name="voted"
             value={this.props.voter.voted}
             fieldChange={this.props.formChange.bind(this, this.props.index)}
           />
-        </TableCell>
-        <TableCell numeric>
+        </StyledTableCell>
+        <StyledTableCell numeric>
           <CancelIcon onClick={this.props.deleteVoter.bind(this, this.props.index)} />
-        </TableCell>
+        </StyledTableCell>
       </TableRow>
     );
   }
 }
 
 export default VoterRow;
+
+const StyledTableCell = glamorous(TableCell)({
+  '> div': {
+    width: '100%'
+  }
+});
