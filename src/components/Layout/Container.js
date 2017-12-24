@@ -10,6 +10,6 @@ export default Container;
 const StyledContainer = glamorous.div({
   position: 'relative',
   maxWidth: '100%',
-  padding: '24px',
+  padding: '16px',
   margin: '0 auto'
 });

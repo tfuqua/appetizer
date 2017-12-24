@@ -61,23 +61,27 @@ class DishForm extends Component<Props, State> {
   render() {
     return (
       <div>
-        <h2>{this.props.dish.title}</h2>
-        <h4>{this.props.dish.description}</h4>
+        <Header>
+          <h2>{this.props.dish.title}</h2>
+          {this.props.dish.image ? (
+            <Img src={`/api/image/${this.props.dish.image}`} alt={this.props.dish.title} />
+          ) : (
+            'No Image provided'
+          )}
+        </Header>
 
-        {this.props.dish.image ? <Img src={`/api/image/${this.props.dish.image}`} alt={this.props.dish.title} /> : null}
-
-        <StarForm field="taste" value={this.state.vote.taste} starClick={this.starClick} />
-        <StarForm field="presentation" value={this.state.vote.presentation} starClick={this.starClick} />
-        <StarForm field="originality" value={this.state.vote.originality} starClick={this.starClick} />
+        <FormWrapper>
+          <StarForm field="taste" value={this.state.vote.taste} starClick={this.starClick} />
+          <StarForm field="presentation" value={this.state.vote.presentation} starClick={this.starClick} />
+          <StarForm field="originality" value={this.state.vote.originality} starClick={this.starClick} />
+        </FormWrapper>
 
         <Buttons>
           <Button disabled={this.validVote()} raised color="primary" onClick={this.vote}>
             Vote
           </Button>
-          <br /> <br />
-          <Button color="primary" onClick={this.props.skipVote}>
-            I was naughty and didn't try this dish
-          </Button>
+          <br /> <br /> <br />
+          <Button onClick={this.props.skipVote}>I was naughty and didn't try this dish</Button>
         </Buttons>
       </div>
     );
@@ -91,6 +95,18 @@ const Buttons = glamorous.div({
 });
 
 const Img = glamorous.img({
-  maxWidth: 100,
+  width: 250,
   height: 'auto'
+});
+
+const Header = glamorous.div({
+  fontSize: '22px',
+  marginBottom: '8px',
+  '& h2': {
+    margin: '5px 0'
+  }
+});
+
+const FormWrapper = glamorous.div({
+  marginBottom: '16px'
 });

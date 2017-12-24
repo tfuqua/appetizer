@@ -14,14 +14,10 @@ export default function request(url: string, options?: Object) {
           'Content-Type': 'application/json'
         }
       };
-    } else {
-      console.log(options);
     }
   } else {
     options = {};
   }
-
-  console.log(options);
 
   return fetch(url, options).then(response => {
     if (!response.ok) {

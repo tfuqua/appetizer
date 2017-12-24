@@ -1,6 +1,7 @@
 //@flow
 import React, { Component } from 'react';
-import Table, { TableBody, TableCell, TableHead, TableRow, TableSortLabel } from 'material-ui/Table';
+import Card from 'material-ui/Card';
+import Button from 'material-ui/Button';
 import glamorous from 'glamorous';
 
 type Props = {
@@ -32,67 +33,45 @@ class LeaderboardTable extends Component<Props, State> {
         : this.props.scores.sort((a, b) => (a[orderBy] < b[orderBy] ? -1 : 1));
 
     return (
-      <Table>
-        <TableHead>
-          <TableRow>
-            <Cell>Dish</Cell>
-            <Cell numeric>
-              <TableSortLabel
-                active={this.state.orderBy === 'taste'}
-                direction={this.state.order}
-                onClick={() => this.handleSort('taste')}>
-                Taste
-              </TableSortLabel>
-            </Cell>
-            <Cell numeric>
-              <TableSortLabel
-                active={this.state.orderBy === 'presentation'}
-                direction={this.state.order}
-                onClick={() => this.handleSort('presentation')}>
-                Presentation
-              </TableSortLabel>
-            </Cell>
-            <Cell numeric>
-              <TableSortLabel
-                active={this.state.orderBy === 'originality'}
-                direction={this.state.order}
-                onClick={() => this.handleSort('originality')}>
-                Originality
-              </TableSortLabel>
-            </Cell>
-            <Cell numeric>
-              <TableSortLabel
-                active={this.state.orderBy === 'total'}
-                direction={this.state.order}
-                onClick={() => this.handleSort('total')}>
-                Total
-              </TableSortLabel>
-            </Cell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((score, i) => (
-            <TableRow key={i}>
-              <Cell>
-                {score.image ? <Img src={`/api/image/${score.image}`} alt={score.title} /> : null}
-                {score.title}
-              </Cell>
-              <Cell numeric sort={this.state.orderBy === 'taste' ? 'true' : undefined}>
-                <Score value={score.taste} />
-              </Cell>
-              <Cell numeric sort={this.state.orderBy === 'presentation' ? 'true' : undefined}>
-                <Score value={score.presentation} />
-              </Cell>
-              <Cell numeric sort={this.state.orderBy === 'originality' ? 'true' : undefined}>
-                <Score value={score.originality} />
-              </Cell>
-              <Cell numeric sort={this.state.orderBy === 'total' ? 'true' : undefined}>
-                <Score value={score.total} />
-              </Cell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      <div>
+        <TextRight>
+          <StyledButton active={this.state.orderBy === 'taste'} onClick={() => this.handleSort('taste')}>
+            Taste
+          </StyledButton>
+          <StyledButton active={this.state.orderBy === 'presentation'} onClick={() => this.handleSort('presentation')}>
+            Presentation
+          </StyledButton>
+          <StyledButton active={this.state.orderBy === 'originality'} onClick={() => this.handleSort('originality')}>
+            Originality
+          </StyledButton>
+          <StyledButton active={this.state.orderBy === 'total'} onClick={() => this.handleSort('total')}>
+            Total
+          </StyledButton>
+        </TextRight>
+
+        {data.slice(0, 5).map((score, i) => (
+          <DishRow key={i}>
+            <div>
+              <Number>{score.title}</Number>
+              {score.image ? <Img src={`/api/image/${score.image}`} alt={score.title} /> : 'No Image Uploaded'}
+            </div>
+            <Scores>
+              <div>
+                Taste: <Score value={score.taste} />
+              </div>
+              <div>
+                Presentation: <Score value={score.presentation} />
+              </div>
+              <div>
+                Originality: <Score value={score.originality} />
+              </div>
+              <div>
+                Total: <Score value={score.total} />
+              </div>
+            </Scores>
+          </DishRow>
+        ))}
+      </div>
     );
   }
 }
@@ -103,11 +82,43 @@ const Score = props => {
 
 export default LeaderboardTable;
 
-const Cell = glamorous(TableCell)({}, ({ sort }) => ({
-  fontWeight: sort ? '700' : '400'
-}));
-
-const Img = glamorous.img({
-  maxWidth: 100,
-  height: 'auto'
+const Number = glamorous.div({
+  fontWeight: 'bold',
+  fontSize: '20px'
 });
+const Img = glamorous.img({
+  width: 120,
+  height: 'auto',
+  '@media(min-width: 480px)': {
+    width: 200
+  }
+});
+
+const DishRow = glamorous(Card)({
+  margin: '16px 0',
+  padding: '16px',
+  display: 'flex',
+  justifyContent: 'space-between'
+});
+
+const Scores = glamorous.div({
+  padding: '8px 16px',
+  textAlign: 'right',
+  '& > div': {
+    padding: '4px 0',
+    fontSize: '16px'
+  },
+  '@media(min-width: 480px)': {
+    '& > div': {
+      fontSize: '18px'
+    }
+  }
+});
+
+const TextRight = glamorous.div({
+  textAlign: 'right'
+});
+
+const StyledButton = glamorous(Button)({}, ({ active }) => ({
+  fontWeight: active ? 'bold' : 400
+}));

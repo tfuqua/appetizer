@@ -44,8 +44,8 @@ const StarWrapper = glamorous.div({
 
 const Field = glamorous.label({
   textTransform: 'capitalize',
-  fontSize: '20px',
-  minWidth: '150px'
+  fontSize: '18px',
+  minWidth: '115px'
 });
 
 const Vote = glamorous.div({
