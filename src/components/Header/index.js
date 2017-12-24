@@ -14,10 +14,6 @@ class Header extends Component<*> {
         <HeaderWrapper>
           <Lights />
           <div>
-            <Link to="/gallery">
-              <Button>Gallery</Button>
-            </Link>
-
             {this.props.location.pathname === '/vote' && (
               <Link to="/">
                 <Button raised color="accent">

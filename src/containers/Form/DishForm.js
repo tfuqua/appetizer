@@ -64,6 +64,8 @@ class DishForm extends Component<Props, State> {
         <h2>{this.props.dish.title}</h2>
         <h4>{this.props.dish.description}</h4>
 
+        {this.props.dish.image ? <Img src={`/api/image/${this.props.dish.image}`} alt={this.props.dish.title} /> : null}
+
         <StarForm field="taste" value={this.state.vote.taste} starClick={this.starClick} />
         <StarForm field="presentation" value={this.state.vote.presentation} starClick={this.starClick} />
         <StarForm field="originality" value={this.state.vote.originality} starClick={this.starClick} />
@@ -86,4 +88,9 @@ export default withRouter(DishForm);
 
 const Buttons = glamorous.div({
   textAlign: 'right'
+});
+
+const Img = glamorous.img({
+  maxWidth: 100,
+  height: 'auto'
 });

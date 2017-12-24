@@ -36,6 +36,7 @@ class DishRow extends Component<Props> {
             placeholder="Enter Dish Description"
           />
         </StyledTableCell>
+        <TableCell>{this.props.dish.image ? this.props.dish.image : 'N/A'}</TableCell>
         <StyledTableCell numeric>
           <IconButton onClick={() => this.props.imageToggle(this.props.dish.id)}>
             <FileIcon />

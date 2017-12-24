@@ -23,6 +23,7 @@ type Props = {
 type State = {
   dishes: Array<Object>,
   id: ?number,
+  file: ?File,
   open: boolean
 };
 
@@ -30,6 +31,7 @@ class DishTable extends Component<Props, State> {
   state = {
     dishes: this.props.dishes,
     id: null,
+    file: null,
     open: false
   };
 
@@ -60,8 +62,17 @@ class DishTable extends Component<Props, State> {
   };
 
   fileChange = (file: any) => {
-    this.props.uploadImage(this.state.id, file).then(response => {
-      console.log(response);
+    this.setState({ file });
+  };
+
+  uploadFile = e => {
+    e.preventDefault();
+
+    this.props.uploadImage(this.state.id, this.state.file).then(response => {
+      if (response) {
+        this.setState({ open: false });
+        this.props.displayMessage(response.message, TOAST_RIGHT);
+      }
     });
   };
 
@@ -89,6 +100,7 @@ class DishTable extends Component<Props, State> {
               <TableRow>
                 <TableCell>Title</TableCell>
                 <TableCell>Description</TableCell>
+                <TableCell>Image</TableCell>
                 <TableCell numeric>Action</TableCell>
               </TableRow>
             </TableHead>
@@ -114,22 +126,20 @@ class DishTable extends Component<Props, State> {
         </form>
 
         <Dialog open={this.state.open} onClose={() => this.setState({ open: false })}>
-          <DialogTitle>Upload Image</DialogTitle>
-          <DialogContent>
-            <form onSubmit={this.handleSubmit} encType="multipart/form-data">
+          <form onSubmit={this.uploadFile} encType="multipart/form-data">
+            <DialogTitle>Upload Image</DialogTitle>
+            <DialogContent>
               <DialogContentText id="alert-dialog-description">
                 <FileField fieldChange={this.fileChange} name="file" />
               </DialogContentText>
-            </form>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} raised color="primary" autoFocus>
-              Upload
-            </Button>
-          </DialogActions>
+            </DialogContent>
+            <DialogActions>
+              <Button raised color="primary" autoFocus type="submit">
+                Upload
+              </Button>
+            </DialogActions>
+          </form>
         </Dialog>
-
-        <img src="/api/image/test.png" alt="" />
       </div>
     );
   }

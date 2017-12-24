@@ -74,7 +74,7 @@ class LeaderboardTable extends Component<Props, State> {
           {data.map((score, i) => (
             <TableRow key={i}>
               <Cell>
-                {score.image ? <img src={`/api/image/${score.image}`} alt={score.title} /> : null}
+                {score.image ? <Img src={`/api/image/${score.image}`} alt={score.title} /> : null}
                 {score.title}
               </Cell>
               <Cell numeric sort={this.state.orderBy === 'taste' ? 'true' : undefined}>
@@ -106,3 +106,8 @@ export default LeaderboardTable;
 const Cell = glamorous(TableCell)({}, ({ sort }) => ({
   fontWeight: sort ? '700' : '400'
 }));
+
+const Img = glamorous.img({
+  maxWidth: 100,
+  height: 'auto'
+});

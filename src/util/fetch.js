@@ -5,18 +5,23 @@ import fetch from 'isomorphic-fetch';
  * Requests a URL, returning a promise
  */
 export default function request(url: string, options?: Object) {
-  if (typeof options === 'undefined') {
-    options = {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      }
-    };
+  if (options) {
+    if (typeof options.headers === 'undefined') {
+      options = {
+        ...options,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
+      };
+    } else {
+      console.log(options);
+    }
   } else {
-    options.headers = {
-      ...options.headers
-    };
+    options = {};
   }
+
+  console.log(options);
 
   return fetch(url, options).then(response => {
     if (!response.ok) {

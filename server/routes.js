@@ -1,6 +1,7 @@
 import express from 'express';
 const { getVoters, getVoterByID, saveVoters, saveVote } = require('./service/voterService');
-const { getDishes, saveDishes, getImage, saveImage } = require('./service/dishService');
+const { getDishes, saveDishes } = require('./service/dishService');
+const { getImage, saveImage } = require('./service/imageService');
 const router = express.Router();
 
 router.route('/voters').get(getVoters);
