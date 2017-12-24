@@ -27,16 +27,22 @@ class Vote extends Component<*> {
         <Container>
           <div>
             {this.props.voters ? (
-              <Grid container>
-                {this.props.voters.map((voter, i) => (
-                  <Grid item xs={12} sm={6} md={4} lg={3}>
-                    <VoterCard onClick={() => this.navigate(voter)}>
-                      <Avatar className="avatar">{voter.name.charAt(0)}</Avatar>
-                      <H3>{voter.name}</H3>
-                    </VoterCard>
-                  </Grid>
-                ))}
-              </Grid>
+              this.props.voters.length > 0 ? (
+                <Grid container>
+                  {this.props.voters.map((voter, i) => (
+                    <Grid item xs={12} sm={6} md={4} lg={3}>
+                      <VoterCard onClick={() => this.navigate(voter)}>
+                        <Avatar className="avatar">{voter.name.charAt(0)}</Avatar>
+                        <H3>{voter.name}</H3>
+                      </VoterCard>
+                    </Grid>
+                  ))}
+                </Grid>
+              ) : (
+                <Container>
+                  <h2>Everyone has voted!</h2>
+                </Container>
+              )
             ) : (
               <Loader />
             )}

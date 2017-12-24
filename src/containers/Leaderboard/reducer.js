@@ -6,7 +6,8 @@ function leaderboardReducer(state: Object = {}, action: Object) {
     case GET_LEADERBOARD:
       return {
         ...state,
-        scores: action.leaderboard
+        scores: action.leaderboard,
+        votesLeft: action.votesLeft
       };
     default:
       return state;

@@ -1,5 +1,6 @@
 //@flow
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import Button from 'material-ui/Button';
@@ -13,6 +14,7 @@ class Header extends Component<*> {
       <AppBar position="static">
         <HeaderWrapper>
           <Lights />
+          <VotesLeft>{this.props.votesLeft} Votes Remaining</VotesLeft>
           <div>
             {this.props.location.pathname === '/vote' && (
               <Link to="/">
@@ -52,7 +54,13 @@ class Header extends Component<*> {
   }
 }
 
-export default withRouter(Header);
+function mapStateToProps(store, props) {
+  return {
+    votesLeft: store.leaderboard.votesLeft
+  };
+}
+
+export default withRouter(connect(mapStateToProps)(Header));
 
 const HeaderWrapper = glamorous.div({
   minHeight: 104,
@@ -60,5 +68,10 @@ const HeaderWrapper = glamorous.div({
   padding: '50px 8px 8px',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'flex-end'
+  justifyContent: 'space-between'
+});
+
+const VotesLeft = glamorous.div({
+  color: '#fff',
+  fontWeight: 'bold'
 });

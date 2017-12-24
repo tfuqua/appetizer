@@ -1,17 +1,18 @@
 import Dish from '../models/Dish';
+import Voter from '../models/Voter';
 
 //Get Leaderboard
 export function getLeaderboardData() {
-  let leaderboard = [];
-  return Dish.find()
-    .populate('votes')
-    .then(data => {
-      data.forEach(dish => {
-        leaderboard.push(calculateScore(dish));
-      });
+  let dishPromise = Dish.find().populate('votes');
+  let voterPromise = Voter.count({ voted: false });
 
-      return leaderboard;
+  return Promise.all([dishPromise, voterPromise]).then(values => {
+    let leaderboard = [];
+    values[0].forEach(dish => {
+      leaderboard.push(calculateScore(dish));
     });
+    return { leaderboard, votesLeft: values[1] };
+  });
 }
 
 function calculateScore(dish) {

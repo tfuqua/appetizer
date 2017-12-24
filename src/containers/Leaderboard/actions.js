@@ -1,10 +1,10 @@
 // @flow
 export const GET_LEADERBOARD = 'GET_LEADERBOARD';
 
-export function receiveLeaderboard(leaderboard: Array<Object>) {
-  console.log(leaderboard);
+export function receiveLeaderboard(results: Object) {
   return {
     type: GET_LEADERBOARD,
-    leaderboard
+    leaderboard: results.leaderboard,
+    votesLeft: results.votesLeft
   };
 }
