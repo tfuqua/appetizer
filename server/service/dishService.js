@@ -17,16 +17,15 @@ export function getDishes(req, res) {
 export function saveDishes(req, res) {
   if (!req.body) return res.sendStatus(400);
 
-  console.log(req.body);
   const dishes = req.body;
 
   Dish.remove().then(err => {
     dishes.forEach(d => {
       let dish = new Dish({ ...d });
 
-      console.log(dish);
       dish.save((err, data) => {
         if (err) {
+          console.log(err);
           res.status(500).send(err);
           return;
         }
