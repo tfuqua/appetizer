@@ -15,7 +15,8 @@ const app = express();
 const server = http.Server(app);
 socketInit(server); //Setup Websocket
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use('/api', routes);
 
 app.use('/', express.static(path.join(__dirname, '../')));
