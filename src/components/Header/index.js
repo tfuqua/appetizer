@@ -10,11 +10,14 @@ import Lights from 'components/Lights';
 
 class Header extends Component<*> {
   render() {
+    console.log(this.props.votesLeft);
     return (
       <AppBar position="static">
         <HeaderWrapper>
           <Lights />
-          <VotesLeft>{this.props.votesLeft} Votes Remaining</VotesLeft>
+          <VotesLeft>
+            {this.props.votesLeft > -1 ? <span>{this.props.votesLeft} Votes Remaining</span> : null}
+          </VotesLeft>
           <div>
             {this.props.location.pathname === '/vote' && (
               <Link to="/">
