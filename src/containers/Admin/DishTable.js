@@ -134,7 +134,7 @@ class DishTable extends Component<Props, State> {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button raised color="primary" autoFocus type="submit">
+              <Button raised color="primary" autoFocus type="submit" onClick={this.uploadFile}>
                 Upload
               </Button>
             </DialogActions>
