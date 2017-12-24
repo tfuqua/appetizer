@@ -14,9 +14,7 @@ export default function request(url: string, options?: Object) {
     };
   } else {
     options.headers = {
-      ...options.headers,
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
+      ...options.headers
     };
   }
 

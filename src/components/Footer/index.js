@@ -7,11 +7,9 @@ class Footer extends Component<*> {
   render() {
     return (
       <footer>
-        {process.env.NODE_ENV !== 'production' ? (
-          <StyledDiv>
-            <Link to="/admin">Admin</Link>
-          </StyledDiv>
-        ) : null}
+        <StyledDiv>
+          <Link to="/admin">Admin</Link>
+        </StyledDiv>
       </footer>
     );
   }

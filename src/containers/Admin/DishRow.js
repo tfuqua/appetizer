@@ -2,16 +2,18 @@
 import React, { Component } from 'react';
 import { TableCell, TableRow } from 'material-ui/Table';
 import CancelIcon from 'material-ui-icons/Cancel';
+import IconButton from 'material-ui/IconButton';
+import FileIcon from 'material-ui-icons/FileUpload';
 import glamorous from 'glamorous';
 
 import TextField from 'components/TextField';
-import FileField from 'components/TextField/FileField';
 
 type Props = {
   dish: Object,
   index: number,
   formChange: Function,
-  deleteDish: Function
+  deleteDish: Function,
+  imageToggle: Function
 };
 
 class DishRow extends Component<Props> {
@@ -34,20 +36,14 @@ class DishRow extends Component<Props> {
             placeholder="Enter Dish Description"
           />
         </StyledTableCell>
-        <StyledTableCell>
-          <FileField
-            name="img"
-            value={this.props.dish.img}
-            fieldChange={this.props.formChange.bind(this, this.props.index)}
-            placeholder="Enter File"
-          />
-        </StyledTableCell>
         <StyledTableCell numeric>
-          <CancelIcon onClick={this.props.deleteDish.bind(this, this.props.index)} />
+          <IconButton onClick={() => this.props.imageToggle(this.props.dish.id)}>
+            <FileIcon />
+          </IconButton>
+          <IconButton onClick={this.props.deleteDish.bind(this, this.props.index)}>
+            <CancelIcon />
+          </IconButton>
         </StyledTableCell>
-        <TableCell colSpan={4}>
-          <pre>{JSON.stringify(this.props.dish, null, 2)}</pre>
-        </TableCell>
       </TableRow>
     );
   }

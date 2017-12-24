@@ -9,7 +9,7 @@ class FileField extends Component<*> {
 
   fileChange = (e: Event) => {
     const file = e.target.files[0];
-    this.setState({ file });
+    this.props.fieldChange(file);
   };
 
   render() {

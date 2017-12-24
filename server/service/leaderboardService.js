@@ -18,6 +18,7 @@ function calculateScore(dish) {
   if (dish.votes.length === 0) {
     return {
       title: dish.title,
+      image: dish.image,
       taste: 0,
       originality: 0,
       presentation: 0,
@@ -43,6 +44,7 @@ function calculateScore(dish) {
 
   return {
     title: dish.title,
+    image: dish.image,
     taste,
     originality,
     presentation,

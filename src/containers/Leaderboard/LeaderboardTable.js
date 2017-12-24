@@ -73,7 +73,10 @@ class LeaderboardTable extends Component<Props, State> {
         <TableBody>
           {data.map((score, i) => (
             <TableRow key={i}>
-              <Cell>{score.title}</Cell>
+              <Cell>
+                {score.image ? <img src={`/api/image/${score.image}`} alt={score.title} /> : null}
+                {score.title}
+              </Cell>
               <Cell numeric sort={this.state.orderBy === 'taste' ? 'true' : undefined}>
                 <Score value={score.taste} />
               </Cell>
