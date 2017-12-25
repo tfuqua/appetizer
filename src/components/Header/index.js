@@ -10,7 +10,6 @@ import Lights from 'components/Lights';
 
 class Header extends Component<*> {
   render() {
-    console.log(this.props.votesLeft);
     return (
       <AppBar position="static">
         <HeaderWrapper>

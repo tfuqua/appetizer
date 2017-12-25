@@ -20,7 +20,6 @@ class Leaderboard extends Component<*> {
         <Container>
           {this.props.scores ? (
             <TableWrapper>
-              <h1>Top 5 Dishes</h1>
               <LeaderboardTable scores={this.props.scores} />
             </TableWrapper>
           ) : (

@@ -49,7 +49,7 @@ class LeaderboardTable extends Component<Props, State> {
           </StyledButton>
         </TextRight>
 
-        {data.slice(0, 5).map((score, i) => (
+        {data.map((score, i) => (
           <DishRow key={i}>
             <div>
               <Number>{score.title}</Number>
@@ -87,10 +87,10 @@ const Number = glamorous.div({
   fontSize: '20px'
 });
 const Img = glamorous.img({
-  width: 120,
+  width: 80,
   height: 'auto',
   '@media(min-width: 480px)': {
-    width: 200
+    width: 100
   }
 });
 
